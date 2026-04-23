@@ -10,26 +10,29 @@ const frameCount = 211; // Extracted at 15fps from 14s video
 const frames = [];
 let loadedCount = 0;
 
-// Preload all frames with progress tracking
+// Preload frames with ultra-fast initial burst
 function preloadFrames() {
+    const threshold = 10; // Show site almost immediately after 10 frames
+    let thresholdReached = false;
+
     for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
         img.src = `frames/frame_${String(i).padStart(4, '0')}.jpg`;
         img.onload = () => {
             loadedCount++;
             updateLoadingProgress(loadedCount, frameCount);
-            if (loadedCount === frameCount) {
-                hideLoadingScreen();
-                drawFrame(0);
+            
+            if (loadedCount === 1) drawFrame(0);
+
+            // Fast Loading: Handoff to main site
+            if (!thresholdReached && loadedCount >= threshold) {
+                thresholdReached = true;
+                setTimeout(hideLoadingScreen, 100);
             }
         };
         img.onerror = () => {
             loadedCount++;
             updateLoadingProgress(loadedCount, frameCount);
-            if (loadedCount === frameCount) {
-                hideLoadingScreen();
-                drawFrame(0);
-            }
         };
         frames.push(img);
     }
@@ -65,14 +68,15 @@ function updateLoadingProgress(loaded, total) {
     const bar = document.getElementById('loaderBar');
     const txt = document.getElementById('loaderText');
     if (bar) bar.style.width = pct + '%';
-    if (txt) txt.textContent = `LOADING ${pct}%`;
+    if (txt) txt.textContent = `OPTIMIZING ASSETS ${pct}%`;
 }
 
 function hideLoadingScreen() {
     const loader = document.getElementById('frameLoader');
     if (loader) {
         loader.style.opacity = '0';
-        setTimeout(() => { loader.style.display = 'none'; }, 800);
+        loader.style.pointerEvents = 'none';
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
     }
 }
 
@@ -199,31 +203,34 @@ document.querySelectorAll('.premium-process-card').forEach(card => {
 });
 
 /* ═══════════════════════════════════════════
-   GENERATE 30 REVIEWS
+   GENERATE 30 REVIEWS (Redesigned)
    ═══════════════════════════════════════════ */
 
 const reviewsWrapper = document.getElementById('reviews-wrapper');
 if (reviewsWrapper) {
-    const sampleNames = ["Eleanor Vance", "Julian Sterling", "Marcus Thorne", "Sophia Aris", "Alexander Rossi", "Isabella Chen", "Maximilian Voss", "Olivia Bennett"];
-    const sampleQuotes = [
-        "Lumière transformed our penthouse into a cinematic sanctuary. The attention to detail and 8K visualizations were simply breathtaking.",
-        "The absolute pinnacle of modern luxury. Their ability to source rare materials globally made our headquarters an architectural masterpiece.",
-        "They don't just design rooms; they engineer experiences. The moody, minimalist aesthetic is unmatched in the industry.",
-        "From the first concept to the final reveal, the process was seamless. The bespoke furniture curation gave our estate a truly unique soul.",
-        "Uncompromising quality and visionary design. The lighting choreography completely redefined the atmosphere of our gallery."
+    const clients = [
+        { name: "Eleanor Vance", loc: "Manhattan, NY", tag: "Penthouse Design", quote: "Lumière transformed our penthouse into a <span>cinematic sanctuary</span>. The attention to detail and 8K visualizations were simply breathtaking." },
+        { name: "Julian Sterling", loc: "London, UK", tag: "Corporate HQ", quote: "The absolute pinnacle of <span>modern luxury</span>. Their ability to source rare materials globally made our headquarters an architectural masterpiece." },
+        { name: "Marcus Thorne", loc: "Dubai, UAE", tag: "Luxury Villa", quote: "They don't just design rooms; they <span>engineer experiences</span>. The moody, minimalist aesthetic is unmatched in the industry." },
+        { name: "Sophia Aris", loc: "Paris, FR", tag: "Boutique Hotel", quote: "From the first concept to the final reveal, the process was <span>seamless</span>. The bespoke furniture curation gave our hotel a unique soul." },
+        { name: "Alexander Rossi", loc: "Milan, IT", tag: "Private Estate", quote: "Uncompromising quality and <span>visionary design</span>. The lighting choreography completely redefined the atmosphere of our gallery." }
     ];
 
     let html = '';
     for (let i = 0; i < 30; i++) {
+        const c = clients[i % clients.length];
         html += `
             <div class="swiper-slide">
                 <div class="testi-card">
-                    <p class="testi-quote">${sampleQuotes[i % sampleQuotes.length]}</p>
+                    <div class="testi-project-tag">${c.tag}</div>
+                    <div class="card-rating">★★★★★</div>
+                    <p class="testi-quote">${c.quote}</p>
                     <div class="testi-author">
-                        <div class="t-avatar"><img src="https://i.pravatar.cc/100?img=${(i % 70) + 1}" alt="Client"></div>
+                        <div class="t-avatar"><img src="https://i.pravatar.cc/150?img=${(i % 70) + 1}" alt="Client"></div>
                         <div class="t-info">
-                            <h4>${sampleNames[i % sampleNames.length]}</h4>
-                            <span><span class="verified-icon">✦</span> International Client</span>
+                            <div class="location"><span>✦</span> ${c.loc}</div>
+                            <h4>${c.name}</h4>
+                            <div class="verified"><span class="verified-icon">✔</span> Verified Partnership</div>
                         </div>
                     </div>
                 </div>
@@ -234,14 +241,13 @@ if (reviewsWrapper) {
 
     new Swiper('.mySwiper', {
         slidesPerView: 1,
-        spaceBetween: 24,
+        spaceBetween: 32,
         loop: true,
         grabCursor: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
+        autoplay: { delay: 4000, disableOnInteraction: false },
         breakpoints: {
             640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1440: { slidesPerView: 4 }
+            1024: { slidesPerView: 3 }
         }
     });
 }
