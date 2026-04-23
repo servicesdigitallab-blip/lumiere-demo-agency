@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects | LUMIÈRE STUDIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .projects-page { padding-top:150px; }
+        .filter-bar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; margin-bottom:60px; border-bottom:1px solid var(--border); padding-bottom:30px; }
+        .filters { display:flex; gap:12px; flex-wrap:wrap; }
+        .filter-btn { background:transparent; border:1px solid var(--border); color:var(--white-muted); padding:10px 24px; border-radius:100px; font-size:13px; font-weight:500; text-transform:uppercase; letter-spacing:0.05em; transition:0.3s; cursor:pointer; }
+        .filter-btn:hover, .filter-btn.active { background:var(--blue-glow); color:var(--white); border-color:var(--blue-glow); }
+        .search-box { position:relative; width:300px; max-width:100%; }
+        .search-box input { width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:12px 20px; border-radius:100px; color:var(--white); font-family:var(--font-body); font-size:14px; outline:none; transition:0.3s; }
+        .search-box input:focus { border-color:var(--blue-glow); }
+        .search-box input::placeholder { color:var(--white-muted); }
+        .port-grid.full-grid { grid-template-columns:repeat(3, 1fr); }
+        .port-item.large { grid-column:span 1; aspect-ratio:4/3; } /* Override large in full grid */
+        @media(max-width:1024px) { .port-grid.full-grid { grid-template-columns:repeat(2, 1fr); } }
+        @media(max-width:768px) { .port-grid.full-grid { grid-template-columns:1fr; } .filter-bar { flex-direction:column; align-items:flex-start; } .search-box { width:100%; } }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <header id="header" class="scrolled">
+        <a href="index.html" class="logo">LUMIÈRE <span>STUDIO</span></a>
+        <nav class="nav-links">
+            <a href="index.html#portfolio" class="hover-magnet">Back to Home</a>
+        </nav>
+        <a href="index.html#contact" class="btn-primary hover-magnet" style="padding:10px 24px; font-size:12px;">Start Project</a>
+    </header>
+
+    <section class="projects-page">
+        <div class="container">
+            <h1 class="title-xl gsap-title">Global <span class="blue-text">Portfolio</span></h1>
+            <p class="text-body" style="margin-bottom:60px; font-size:1.2rem;">Explore our curated collection of architectural masterpieces and interior design projects worldwide.</p>
+            
+            <div class="filter-bar">
+                <div class="filters">
+                    <button class="filter-btn active hover-magnet" data-filter="all">All Projects</button>
+                    <button class="filter-btn hover-magnet" data-filter="residential">Residential</button>
+                    <button class="filter-btn hover-magnet" data-filter="commercial">Commercial</button>
+                    <button class="filter-btn hover-magnet" data-filter="hospitality">Hospitality</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="project-search" placeholder="Search by name or location...">
+                </div>
+            </div>
+
+            <div class="port-grid full-grid" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="port-item tilt-card" data-category="residential" data-name="the obsidian penthouse new york">
+                    <img src="assets/port-1.png" alt="Penthouse" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>The Obsidian Penthouse</h3>
+                            <span class="badge">New York</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="port-item tilt-card" data-category="hospitality" data-name="azure hotel lobby dubai">
+                    <img src="assets/port-2.png" alt="Hotel Lobby" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Azure Hotel Lobby</h3>
+                            <span class="badge">Dubai</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="port-item tilt-card" data-category="residential" data-name="silicon villa california">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="Villa" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Silicon Villa</h3>
+                            <span class="badge">California</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 (Kitchen) -->
+                <div class="port-item tilt-card" data-category="residential" data-name="minimalist kitchen estate toronto">
+                    <img src="assets/port-3.png" alt="Kitchen" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Dark Minimalist Kitchen</h3>
+                            <span class="badge">Toronto</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 5 (Bedroom) -->
+                <div class="port-item tilt-card" data-category="residential" data-name="panoramic master suite tokyo">
+                    <img src="assets/port-4.png" alt="Bedroom" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Panoramic Master Suite</h3>
+                            <span class="badge">Tokyo</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 6 (Office) -->
+                <div class="port-item tilt-card" data-category="commercial" data-name="executive corporate office london">
+                    <img src="assets/port-5.png" alt="Office" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Executive Suite</h3>
+                            <span class="badge">London</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 7 (Unsplash) -->
+                <div class="port-item tilt-card" data-category="commercial" data-name="maison privee boutique paris">
+                    <img src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=1200&q=80" alt="Boutique" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Maison Privée Boutique</h3>
+                            <span class="badge">Paris</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 8 (Unsplash) -->
+                <div class="port-item tilt-card" data-category="hospitality" data-name="lakeview private club geneva">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" alt="Club" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Lakeview Private Club</h3>
+                            <span class="badge">Geneva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-bottom">
+        <div>© 2026 LUMIÈRE STUDIO</div>
+        <div>Design by Nexora</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Projects Filter and Search Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('project-search');
+        const projects = document.querySelectorAll('#projects-grid .port-item');
+
+        function filterProjects() {
+            const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            projects.forEach(project => {
+                const category = project.getAttribute('data-category');
+                const name = project.getAttribute('data-name');
+                
+                const matchesFilter = activeFilter === 'all' || activeFilter === category;
+                const matchesSearch = name.includes(searchTerm);
+
+                if(matchesFilter && matchesSearch) {
+                    project.style.display = 'block';
+                    gsap.to(project, {scale: 1, opacity: 1, duration: 0.4});
+                } else {
+                    gsap.to(project, {scale: 0.95, opacity: 0, duration: 0.4, onComplete: () => {
+                        project.style.display = 'none';
+                    }});
+                }
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterProjects();
+            });
+        });
+
+        searchInput.addEventListener('input', filterProjects);
+    </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO | Ultra Modern Interior Design</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Loading Screen -->
+    <div id="frameLoader">
+        <div class="loader-brand">DEMO</div>
+        <div class="loader-bar-track">
+            <div id="loaderBar" class="loader-bar-fill"></div>
+        </div>
+        <div id="loaderText" class="loader-text">LOADING 0%</div>
+    </div>
+
+    <header id="header">
+        <a href="#" class="logo">DEMO <span>STUDIO</span></a>
+        <nav class="nav-links">
+            <a href="#portfolio" class="hover-magnet">Portfolio</a>
+            <a href="#about" class="hover-magnet">About</a>
+            <a href="#services" class="hover-magnet">Services</a>
+            <a href="#process" class="hover-magnet">Process</a>
+            <a href="#reviews" class="hover-magnet">Reviews</a>
+        </nav>
+        <a href="#contact" class="btn-primary hover-magnet" style="padding:10px 24px; font-size:12px;">Start Project</a>
+    </header>
+
+    <!-- Hero Section: Canvas Frame-by-Frame Scroll -->
+    <section id="hero" class="hero-section">
+        <div class="hero-canvas-container">
+            <canvas id="heroCanvas"></canvas>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="port-header">
+                <div>
+                    <div class="label-sm">Selected Works</div>
+                    <h2 class="title-lg gsap-title" style="margin:0;">Our <span class="blue-text">Portfolio</span></h2>
+                </div>
+                <a href="projects.html" class="btn-primary hover-magnet" style="padding:14px 28px;">View All Projects</a>
+            </div>
+            <div class="port-grid">
+                <div class="port-item large tilt-card">
+                    <img src="assets/port-1.png" alt="Penthouse" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>The Obsidian Penthouse</h3>
+                            <span class="badge">New York</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="port-item tilt-card">
+                    <img src="assets/port-2.png" alt="Hotel Lobby" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Azure Hotel Lobby</h3>
+                            <span class="badge">Dubai</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="port-item tilt-card">
+                    <img src="assets/port-4.png" alt="Bedroom" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Panoramic Master Suite</h3>
+                            <span class="badge">Tokyo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="port-item tilt-card">
+                    <img src="assets/port-3.png" alt="Kitchen" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Dark Minimalist Kitchen</h3>
+                            <span class="badge">Toronto</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="port-item tilt-card">
+                    <img src="assets/port-5.png" alt="Office" class="port-img">
+                    <div class="port-overlay">
+                        <div>
+                            <h3>Executive Suite</h3>
+                            <span class="badge">London</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="features" id="about">
+        <div class="container">
+            <div class="label-sm">Why Us</div>
+            <h2 class="title-lg gsap-title">Designed to <span class="blue-text">Inspire.</span><br>Built to <span class="blue-text">Last.</span></h2>
+            <div class="features-grid">
+                <div class="border-glow-card">
+                    <span class="edge-light"></span>
+                    <div class="border-glow-inner">
+                        <div class="f-icon">✦</div>
+                        <h3>Bespoke Vision</h3>
+                        <p class="text-body">Every project is a unique architectural masterpiece, designed specifically for your lifestyle and vision.</p>
+                    </div>
+                </div>
+                <div class="border-glow-card">
+                    <span class="edge-light"></span>
+                    <div class="border-glow-inner">
+                        <div class="f-icon">◈</div>
+                        <h3>Global Materials</h3>
+                        <p class="text-body">We source the finest hyper-modern materials globally, from Italian stone to Japanese joinery.</p>
+                    </div>
+                </div>
+                <div class="border-glow-card">
+                    <span class="edge-light"></span>
+                    <div class="border-glow-inner">
+                        <div class="f-icon">◉</div>
+                        <h3>3D Visualization</h3>
+                        <p class="text-body">Experience your future sanctuary in 8K cinematic detail before construction even begins.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Premium Horizontal Layout) -->
+    <section class="services-luxury-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <div class="label-sm">Our Services</div>
+                <h2 class="services-main-title gsap-title">Crafting <span class="gold-text">Excellence</span></h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="services-row">
+                <div class="service-col">
+                    <div class="service-bg-num">01</div>
+                    <div class="service-icon">◈</div>
+                    <h3 class="service-title">3D Visualization</h3>
+                    <div class="service-divider"></div>
+                    <p class="service-desc">Photorealistic renders that bring your vision to life before work begins</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-sep"></div>
+                <div class="service-col">
+                    <div class="service-bg-num">02</div>
+                    <div class="service-icon">✦</div>
+                    <h3 class="service-title">Space Planning</h3>
+                    <div class="service-divider"></div>
+                    <p class="service-desc">Intelligent design that maximizes beauty and function in every square foot</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-sep"></div>
+                <div class="service-col">
+                    <div class="service-bg-num">03</div>
+                    <div class="service-icon">◉</div>
+                    <h3 class="service-title">Furniture Curation</h3>
+                    <div class="service-divider"></div>
+                    <p class="service-desc">Bespoke pieces sourced from the world's most prestigious design ateliers</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-sep"></div>
+                <div class="service-col">
+                    <div class="service-bg-num">04</div>
+                    <div class="service-icon">⬡</div>
+                    <h3 class="service-title">Lighting Design</h3>
+                    <div class="service-divider"></div>
+                    <p class="service-desc">Precision lighting that transforms spaces into immersive luxury experiences</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:80px;">
+                <a href="#" class="btn-services hover-magnet">View All Services →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="label-sm">Methodology</div>
+            <h2 class="title-lg gsap-title">The <span class="blue-text">Process</span></h2>
+            <div class="process-cards">
+                <div class="process-card premium-process-card">
+                    <div class="ppc-inner">
+                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #9333ea, #db2777, #2563eb);"></div>
+                        <div class="p-num">01</div>
+                        <h3 class="p-title">Discovery</h3>
+                        <p class="p-desc">Deep-dive consultation to align with your aesthetic, functional needs, and overarching vision.</p>
+                    </div>
+                </div>
+                <div class="process-card premium-process-card">
+                    <div class="ppc-inner">
+                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #06b6d4, #3b82f6, #9333ea);"></div>
+                        <div class="p-num">02</div>
+                        <h3 class="p-title">Concept & 3D</h3>
+                        <p class="p-desc">Hyper-realistic 8K renders and physical mood boards to lock in the material palette.</p>
+                    </div>
+                </div>
+                <div class="process-card premium-process-card">
+                    <div class="ppc-inner">
+                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #f97316, #ef4444, #db2777);"></div>
+                        <div class="p-num">03</div>
+                        <h3 class="p-title">Execution</h3>
+                        <p class="p-desc">Precision construction management and global sourcing of premium furnishings.</p>
+                    </div>
+                </div>
+                <div class="process-card premium-process-card">
+                    <div class="ppc-inner">
+                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #10b981, #3b82f6, #6366f1);"></div>
+                        <div class="p-num">04</div>
+                        <h3 class="p-title">Reveal</h3>
+                        <p class="p-desc">Flawless white-glove installation and final staging for the ultimate reveal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Slider -->
+    <section class="testimonials" id="reviews">
+        <div class="container">
+            <div class="testi-header">
+                <div class="label-sm">Client Voices</div>
+                <h2 class="title-lg gsap-title" style="margin:0;">Don't just take our word.</h2>
+                <div class="rating-badge">
+                    <div class="stars">★★★★★</div>
+                    <span>4.8/5 Average Rating (Based on 30+ Reviews)</span>
+                </div>
+            </div>
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="reviews-wrapper"></div>
+        </div>
+    </section>
+
+    <!-- Footer CTA with Form -->
+    <section class="cta-section" id="contact">
+        <div class="container cta-grid">
+            <div class="cta-left">
+                <div class="label-sm">Start Your Project</div>
+                <h2 class="cta-title gsap-title">Let's build<br><span class="blue-text">together.</span></h2>
+                <p class="text-body" style="font-size:1.2rem; margin-top:20px;">Ready to create your masterpiece? Fill out the form and our design team will contact you within 24 hours.</p>
+            </div>
+            <div class="cta-right">
+                <form class="contact-form tilt-card">
+                    <div class="card-glow"></div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="" disabled selected>Select Budget</option>
+                            <option value="50-100k">$50,000 - $100,000</option>
+                            <option value="100-250k">$100,000 - $250,000</option>
+                            <option value="250k+">$250,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Tell us about your project..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-bottom">
+        <div>© 2026 DEMO STUDIO</div>
+        <div>Design by Nexora</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
