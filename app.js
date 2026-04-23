@@ -81,53 +81,8 @@ function hideLoadingScreen() {
 }
 
 /* ═══════════════════════════════════════════
-   CURSOR, MAGNETIC, TILT EFFECTS
+   HOVER & TILT EFFECTS
    ═══════════════════════════════════════════ */
-
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorRing = document.querySelector('.cursor-ring');
-let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-let ringX = mouseX, ringY = mouseY;
-
-document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    if (window.innerWidth > 768) {
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top = mouseY + 'px';
-    }
-});
-
-function renderCursor() {
-    if (window.innerWidth > 768) {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        cursorRing.style.left = ringX + 'px';
-        cursorRing.style.top = ringY + 'px';
-    }
-    requestAnimationFrame(renderCursor);
-}
-renderCursor();
-
-// Magnetic Hover Effect
-document.querySelectorAll('.hover-magnet').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
-        document.body.classList.add('cursor-hover');
-    });
-    btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
-        document.body.classList.remove('cursor-hover');
-    });
-});
-
-// Cursor Hover on Links
-document.querySelectorAll('a, .port-item, .tilt-card, .service-col, .border-glow-card, .premium-process-card').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
 
 // 3D Tilt Effect on Cards (Portfolio etc)
 document.querySelectorAll('.tilt-card').forEach(card => {
@@ -203,7 +158,7 @@ document.querySelectorAll('.premium-process-card').forEach(card => {
 });
 
 /* ═══════════════════════════════════════════
-   GENERATE 30 REVIEWS (Redesigned)
+   GENERATE 30 REVIEWS
    ═══════════════════════════════════════════ */
 
 const reviewsWrapper = document.getElementById('reviews-wrapper');
