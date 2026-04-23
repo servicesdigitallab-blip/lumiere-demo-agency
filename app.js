@@ -204,27 +204,26 @@ document.querySelectorAll('.premium-process-card').forEach(card => {
 
 const reviewsWrapper = document.getElementById('reviews-wrapper');
 if (reviewsWrapper) {
-    const sampleNames = ["Sarah Jenkins", "James Thorne", "Michael Chen", "Emily Roberts", "David Alaba", "Sophia Loren", "Alexander Wright", "Olivia Bennett"];
+    const sampleNames = ["Eleanor Vance", "Julian Sterling", "Marcus Thorne", "Sophia Aris", "Alexander Rossi", "Isabella Chen", "Maximilian Voss", "Olivia Bennett"];
     const sampleQuotes = [
-        "They transformed our penthouse into a dark, moody sanctuary. The attention to detail and 8K renders were exactly what was delivered.",
-        "The absolute pinnacle of luxury design. Their ability to source rare materials globally made our hotel lobby an architectural icon.",
-        "They don't just design rooms; they engineer experiences. The 21st-century modern aesthetic is unmatched in the industry.",
-        "From concept to execution, the process was flawless. The bespoke furniture curation gave our estate a truly unique character.",
-        "Uncompromising quality. The moody lighting design completely changed the atmosphere of our commercial space."
+        "Lumière transformed our penthouse into a cinematic sanctuary. The attention to detail and 8K visualizations were simply breathtaking.",
+        "The absolute pinnacle of modern luxury. Their ability to source rare materials globally made our headquarters an architectural masterpiece.",
+        "They don't just design rooms; they engineer experiences. The moody, minimalist aesthetic is unmatched in the industry.",
+        "From the first concept to the final reveal, the process was seamless. The bespoke furniture curation gave our estate a truly unique soul.",
+        "Uncompromising quality and visionary design. The lighting choreography completely redefined the atmosphere of our gallery."
     ];
 
     let html = '';
     for (let i = 0; i < 30; i++) {
         html += `
             <div class="swiper-slide">
-                <div class="testi-card tilt-card">
-                    <div class="card-glow"></div>
-                    <p class="testi-quote">"${sampleQuotes[i % sampleQuotes.length]}"</p>
+                <div class="testi-card">
+                    <p class="testi-quote">${sampleQuotes[i % sampleQuotes.length]}</p>
                     <div class="testi-author">
                         <div class="t-avatar"><img src="https://i.pravatar.cc/100?img=${(i % 70) + 1}" alt="Client"></div>
                         <div class="t-info">
                             <h4>${sampleNames[i % sampleNames.length]}</h4>
-                            <span><span class="verified-icon">✔</span> Verified Client</span>
+                            <span><span class="verified-icon">✦</span> International Client</span>
                         </div>
                     </div>
                 </div>
