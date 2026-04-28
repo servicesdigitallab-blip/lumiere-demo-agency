@@ -157,55 +157,7 @@ document.querySelectorAll('.premium-process-card').forEach(card => {
     });
 });
 
-/* ═══════════════════════════════════════════
-   GENERATE 30 REVIEWS
-   ═══════════════════════════════════════════ */
-
-const reviewsWrapper = document.getElementById('reviews-wrapper');
-if (reviewsWrapper) {
-    const clients = [
-        { name: "Eleanor Vance", loc: "Manhattan, NY", tag: "Penthouse Design", quote: "Lumière transformed our penthouse into a <span>cinematic sanctuary</span>. The attention to detail and 8K visualizations were simply breathtaking." },
-        { name: "Julian Sterling", loc: "London, UK", tag: "Corporate HQ", quote: "The absolute pinnacle of <span>modern luxury</span>. Their ability to source rare materials globally made our headquarters an architectural masterpiece." },
-        { name: "Marcus Thorne", loc: "Dubai, UAE", tag: "Luxury Villa", quote: "They don't just design rooms; they <span>engineer experiences</span>. The moody, minimalist aesthetic is unmatched in the industry." },
-        { name: "Sophia Aris", loc: "Paris, FR", tag: "Boutique Hotel", quote: "From the first concept to the final reveal, the process was <span>seamless</span>. The bespoke furniture curation gave our hotel a unique soul." },
-        { name: "Alexander Rossi", loc: "Milan, IT", tag: "Private Estate", quote: "Uncompromising quality and <span>visionary design</span>. The lighting choreography completely redefined the atmosphere of our gallery." }
-    ];
-
-    let html = '';
-    for (let i = 0; i < 30; i++) {
-        const c = clients[i % clients.length];
-        html += `
-            <div class="swiper-slide">
-                <div class="testi-card">
-                    <div class="testi-project-tag">${c.tag}</div>
-                    <div class="card-rating">★★★★★</div>
-                    <p class="testi-quote">${c.quote}</p>
-                    <div class="testi-author">
-                        <div class="t-avatar"><img src="https://i.pravatar.cc/150?img=${(i % 70) + 1}" alt="Client"></div>
-                        <div class="t-info">
-                            <div class="location"><span>✦</span> ${c.loc}</div>
-                            <h4>${c.name}</h4>
-                            <div class="verified"><span class="verified-icon">✔</span> Verified Partnership</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    reviewsWrapper.innerHTML = html;
-
-    new Swiper('.mySwiper', {
-        slidesPerView: 1,
-        spaceBetween: 32,
-        loop: true,
-        grabCursor: true,
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
-        }
-    });
-}
+/* Review generation moved inside load event to ensure GSAP targets exist */
 
 /* ═══════════════════════════════════════════
    TEXT SPLITTING FOR GSAP
@@ -239,6 +191,53 @@ function splitText(selector) {
    ═══════════════════════════════════════════ */
 
 window.addEventListener('load', () => {
+    // 0. GENERATE REVIEWS (Ensures GSAP targets exist)
+    const reviewsWrapper = document.getElementById('reviews-wrapper');
+    if (reviewsWrapper) {
+        const clients = [
+            { name: "Eleanor Vance", loc: "Manhattan, NY", tag: "Penthouse Design", quote: "Lumière transformed our penthouse into a <span>cinematic sanctuary</span>. The attention to detail and 8K visualizations were simply breathtaking." },
+            { name: "Julian Sterling", loc: "London, UK", tag: "Corporate HQ", quote: "The absolute pinnacle of <span>modern luxury</span>. Their ability to source rare materials globally made our headquarters an architectural masterpiece." },
+            { name: "Marcus Thorne", loc: "Dubai, UAE", tag: "Luxury Villa", quote: "They don't just design rooms; they <span>engineer experiences</span>. The moody, minimalist aesthetic is unmatched in the industry." },
+            { name: "Sophia Aris", loc: "Paris, FR", tag: "Boutique Hotel", quote: "From the first concept to the final reveal, the process was <span>seamless</span>. The bespoke furniture curation gave our hotel a unique soul." },
+            { name: "Alexander Rossi", loc: "Milan, IT", tag: "Private Estate", quote: "Uncompromising quality and <span>visionary design</span>. The lighting choreography completely redefined the atmosphere of our gallery." }
+        ];
+
+        let html = '';
+        for (let i = 0; i < 30; i++) {
+            const c = clients[i % clients.length];
+            html += `
+                <div class="swiper-slide">
+                    <div class="testi-card">
+                        <div class="testi-project-tag">${c.tag}</div>
+                        <div class="card-rating">★★★★★</div>
+                        <p class="testi-quote">${c.quote}</p>
+                        <div class="testi-author">
+                            <div class="t-avatar"><img src="https://i.pravatar.cc/150?img=${(i % 70) + 1}" alt="Client"></div>
+                            <div class="t-info">
+                                <div class="location"><span>✦</span> ${c.loc}</div>
+                                <h4>${c.name}</h4>
+                                <div class="verified"><span class="verified-icon">✔</span> Verified Partnership</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        reviewsWrapper.innerHTML = html;
+
+        new Swiper('.mySwiper', {
+            slidesPerView: 1,
+            spaceBetween: 32,
+            loop: true,
+            grabCursor: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+    }
+
     // Init Canvas
     setCanvasSize();
     preloadFrames();
