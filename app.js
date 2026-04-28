@@ -191,56 +191,146 @@ function splitText(selector) {
    ═══════════════════════════════════════════ */
 
 window.addEventListener('load', () => {
-    // 0. GENERATE REVIEWS (Ensures GSAP targets exist)
+    // 0. GENERATE REVIEWS
     const reviewsWrapper = document.getElementById('reviews-wrapper');
     if (reviewsWrapper) {
         const clients = [
-            { name: "Eleanor Vance", loc: "Manhattan, NY", tag: "Penthouse Design", quote: "Lumière transformed our penthouse into a <span>cinematic sanctuary</span>. The attention to detail and 8K visualizations were simply breathtaking." },
-            { name: "Julian Sterling", loc: "London, UK", tag: "Corporate HQ", quote: "The absolute pinnacle of <span>modern luxury</span>. Their ability to source rare materials globally made our headquarters an architectural masterpiece." },
-            { name: "Marcus Thorne", loc: "Dubai, UAE", tag: "Luxury Villa", quote: "They don't just design rooms; they <span>engineer experiences</span>. The moody, minimalist aesthetic is unmatched in the industry." },
-            { name: "Sophia Aris", loc: "Paris, FR", tag: "Boutique Hotel", quote: "From the first concept to the final reveal, the process was <span>seamless</span>. The bespoke furniture curation gave our hotel a unique soul." },
-            { name: "Alexander Rossi", loc: "Milan, IT", tag: "Private Estate", quote: "Uncompromising quality and <span>visionary design</span>. The lighting choreography completely redefined the atmosphere of our gallery." }
+            { name: "Eleanor Vance", loc: "Manhattan, NY", quote: "Lumière transformed our penthouse into a <span>cinematic sanctuary</span>. The attention to detail is simply breathtaking." },
+            { name: "Julian Sterling", loc: "London, UK", quote: "The absolute pinnacle of <span>modern luxury</span>. Their ability to source rare materials made our HQ a masterpiece." },
+            { name: "Sophia Aris", loc: "Paris, FR", quote: "From first concept to final reveal, the process was <span>seamless</span>. The bespoke curation gave our hotel a soul." }
         ];
 
         let html = '';
-        for (let i = 0; i < 30; i++) {
-            const c = clients[i % clients.length];
+        clients.forEach(c => {
             html += `
                 <div class="swiper-slide">
                     <div class="testi-card">
-                        <div class="testi-project-tag">${c.tag}</div>
-                        <div class="card-rating">★★★★★</div>
                         <p class="testi-quote">${c.quote}</p>
                         <div class="testi-author">
-                            <div class="t-avatar"><img src="https://i.pravatar.cc/150?img=${(i % 70) + 1}" alt="Client"></div>
-                            <div class="t-info">
-                                <div class="location"><span>✦</span> ${c.loc}</div>
-                                <h4>${c.name}</h4>
-                                <div class="verified"><span class="verified-icon">✔</span> Verified Partnership</div>
-                            </div>
+                            <h4>${c.name}</h4>
+                            <div class="location">${c.loc}</div>
                         </div>
                     </div>
                 </div>
             `;
-        }
+        });
         reviewsWrapper.innerHTML = html;
 
         new Swiper('.mySwiper', {
             slidesPerView: 1,
-            spaceBetween: 32,
+            spaceBetween: 30,
             loop: true,
-            grabCursor: true,
-            autoplay: { delay: 4000, disableOnInteraction: false },
-            breakpoints: {
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            }
+            autoplay: { delay: 5000 },
+            breakpoints: { 1024: { slidesPerView: 2 } }
         });
     }
 
-    // Init Canvas
+    // Init Canvas & Loader
     setCanvasSize();
     preloadFrames();
+
+    // 1. PHILOSOPHY: REVEAL & SLIDE
+    gsap.from('.gsap-reveal', {
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 80%' },
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power4.out'
+    });
+    gsap.from('.visual-card', {
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
+        rotation: 10,
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'expo.out'
+    });
+
+    // 2. PORTFOLIO: STAGGERED ENTRANCE
+    gsap.from('.grid-item', {
+        scrollTrigger: { trigger: '.curated-grid', start: 'top 80%' },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
+
+    // 3. METHOD: 3D ROTATION FLOW
+    gsap.from('.method-card', {
+        scrollTrigger: { trigger: '.method-flow', start: 'top 85%' },
+        rotationY: -45,
+        z: -100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: 'power2.out'
+    });
+
+    // 4. STUDIO: FLOATING PARALLAX
+    gsap.to('.team-floating', {
+        scrollTrigger: { trigger: '.studio-section', start: 'top bottom', end: 'bottom top', scrub: true },
+        y: -100
+    });
+    gsap.from('.member-profile', {
+        scrollTrigger: { trigger: '.studio-section', start: 'top 80%' },
+        scale: 0.9,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.4,
+        ease: 'elastic.out(1, 0.5)'
+    });
+
+    // 5. IMPACT: GLOW COUNTER
+    document.querySelectorAll('.counter').forEach(num => {
+        const target = parseInt(num.getAttribute('data-val'));
+        gsap.to(num, {
+            innerText: target,
+            duration: 2.5,
+            snap: { innerText: 1 },
+            scrollTrigger: { trigger: num, start: 'top 90%' },
+            onUpdate: function() {
+                num.style.textShadow = `0 0 ${this.progress() * 20}px rgba(184, 158, 107, 0.4)`;
+            }
+        });
+    });
+
+    // 6. FAQ: SKEWED REVEAL
+    gsap.from('.faq-card', {
+        scrollTrigger: { trigger: '.faq-list', start: 'top 90%' },
+        skewX: -10,
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
+
+    // LIGHTBOX SYSTEM
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.zoomable img').forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            gsap.fromTo(lightboxImg, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out' });
+        });
+    });
+    document.querySelector('.close-lightbox').addEventListener('click', () => {
+        gsap.to(lightboxImg, { scale: 0.8, opacity: 0, duration: 0.3, onComplete: () => lightbox.style.display = 'none' });
+    });
+
+    // MAGNETIC EFFECT
+    document.querySelectorAll('.btn-primary, .logo').forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const { offsetX, offsetY, target } = e;
+            const { clientWidth, clientHeight } = target;
+            const x = (offsetX - clientWidth / 2) / 5;
+            const y = (offsetY - clientHeight / 2) / 5;
+            gsap.to(el, { x, y, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out' }));
+    });
 
     // HERO SCROLL → FRAME SCRUB
     ScrollTrigger.create({
@@ -249,14 +339,12 @@ window.addEventListener('load', () => {
         end: 'bottom bottom',
         scrub: 1,
         onUpdate: (self) => {
-            const frameIndex = Math.min(
-                Math.floor(self.progress * (frameCount - 1)),
-                frameCount - 1
-            );
+            const frameIndex = Math.min(Math.floor(self.progress * (frameCount - 1)), frameCount - 1);
             drawFrame(frameIndex);
         }
     });
 
+    // Resize Handler
     window.addEventListener('resize', () => {
         setCanvasSize();
         const hero = document.getElementById('hero');
@@ -266,109 +354,12 @@ window.addEventListener('load', () => {
         drawFrame(frameIndex);
     });
 
-    // Split Text for title animations
-    splitText('.gsap-title');
-
-    // Scroll Header
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) document.querySelector('header').classList.add('scrolled');
-        else document.querySelector('header').classList.remove('scrolled');
-    });
-
-    // 1. SERVICES SECTION: STAGGERED SKEW & FADE
-    gsap.from('.service-col', {
-        scrollTrigger: { trigger: '.services-row', start: 'top 85%' },
-        y: 100,
-        opacity: 0,
-        skewY: 7,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: 'expo.out'
-    });
-    
-    gsap.from('.service-sep', {
-        scrollTrigger: { trigger: '.services-row', start: 'top 85%' },
-        scaleY: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power4.inOut'
-    });
-
-    // 2. FEATURES GRID: SCALE & ROTATE REVEAL
-    gsap.utils.toArray('.border-glow-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            scale: 0.8,
-            rotationX: -45,
-            opacity: 0,
-            duration: 1,
-            delay: i * 0.1,
-            ease: 'back.out(1.7)'
-        });
-    });
-
-    // 3. PROCESS CARDS: HORIZONTAL SLIDE STAGGER
-    gsap.from('.premium-process-card', {
-        scrollTrigger: { trigger: '.process-cards', start: 'top 85%' },
-        x: (i) => i % 2 === 0 ? -100 : 100,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: 'power4.out'
-    });
-
-    // 4. PORTFOLIO ITEMS: 3D REVEAL
-    gsap.utils.toArray('.port-item').forEach((item, i) => {
-        gsap.from(item, {
-            scrollTrigger: { trigger: item, start: 'top 90%' },
-            y: 50,
-            rotationY: 15,
-            opacity: 0,
-            duration: 1,
-            ease: 'power2.out'
-        });
-    });
-
-    // 5. TESTIMONIAL CARDS: SOFT ZOOM
-    gsap.from('.testi-card', {
-        scrollTrigger: { trigger: '.testimonials', start: 'top 80%' },
-        scale: 0.9,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out'
-    });
-
-    // 6. TITLES: CHARACTER RISE
-    document.querySelectorAll('.gsap-title').forEach(title => {
-        gsap.from(title.querySelectorAll('.split-word'), {
-            scrollTrigger: { trigger: title, start: 'top 90%' },
-            y: '100%',
-            rotation: 10,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.04,
-            ease: 'circ.out'
-        });
-    });
-
-    // 7. CONTACT FORM: FOCUS REVEAL
-    gsap.from('.contact-form', {
-        scrollTrigger: { trigger: '.contact-form', start: 'top 85%' },
-        y: 50,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out'
-    });
-
-    // Smooth Scroll for nav links
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-            }
+            if (target) window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
         });
     });
 });
