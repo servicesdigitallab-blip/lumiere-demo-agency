@@ -328,6 +328,57 @@ window.addEventListener('load', () => {
         drawFrame(frameIndex);
     });
 
+    // 6. VALUES: ROTATION STAGGER
+    gsap.from('.value-card', {
+        scrollTrigger: { trigger: '.values-grid', start: 'top 85%' },
+        y: 60,
+        rotationY: -20,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: 'power4.out'
+    });
+
+    // 7. JOURNAL: SCALE UP ENTRY
+    gsap.from('.journal-card', {
+        scrollTrigger: { trigger: '.journal-grid', start: 'top 85%' },
+        scale: 0.95,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: 'expo.out'
+    });
+
+    // 8. TEAM: STAGGERED RISE
+    gsap.from('.team-member', {
+        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' },
+        y: 80,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: 'power4.out'
+    });
+
+    // 9. FAQ: ACCORDION PREVIEW
+    gsap.from('.faq-item', {
+        scrollTrigger: { trigger: '.faq-container', start: 'top 90%' },
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power2.out'
+    });
+
+    // 10. GALLERY: PARALLAX ENTRY
+    gsap.from('.g-item', {
+        scrollTrigger: { trigger: '.gallery-masonry', start: 'top 85%' },
+        y: (i) => i * 20,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.1,
+        ease: 'power3.out'
+    });
+
     // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
