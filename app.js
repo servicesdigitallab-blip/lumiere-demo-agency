@@ -229,81 +229,55 @@ window.addEventListener('load', () => {
     setCanvasSize();
     preloadFrames();
 
-    // 1. PHILOSOPHY: REVEAL & SLIDE
-    gsap.from('.gsap-reveal', {
-        scrollTrigger: { trigger: '.philosophy-section', start: 'top 80%' },
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out'
-    });
-    gsap.from('.visual-card', {
-        scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
-        rotation: 10,
-        scale: 0.8,
+    // 1. PORTFOLIO: 3D REVEAL
+    gsap.from('.port-item', {
+        scrollTrigger: { trigger: '.port-grid', start: 'top 80%' },
+        rotationY: -15,
         opacity: 0,
         duration: 1.2,
+        stagger: 0.2,
+        ease: 'power4.out'
+    });
+
+    // 2. FEATURES: BORDER GLOW SEQUENCE
+    gsap.from('.border-glow-card', {
+        scrollTrigger: { trigger: '.features-grid', start: 'top 85%' },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'back.out(1.7)'
+    });
+
+    // 3. SERVICES: HORIZONTAL SLIDE
+    gsap.from('.service-col', {
+        scrollTrigger: { trigger: '.services-row', start: 'top 85%' },
+        x: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
         ease: 'expo.out'
     });
 
-    // 2. PORTFOLIO: STAGGERED ENTRANCE
-    gsap.from('.grid-item', {
-        scrollTrigger: { trigger: '.curated-grid', start: 'top 80%' },
-        y: 50,
+    // 4. PROCESS CARDS: FLOAT UP
+    gsap.from('.premium-process-card', {
+        scrollTrigger: { trigger: '.process-cards', start: 'top 85%' },
+        y: 80,
         opacity: 0,
         duration: 1,
         stagger: 0.2,
-        ease: 'power3.out'
+        ease: 'power4.out'
     });
 
-    // 3. METHOD: 3D ROTATION FLOW
-    gsap.from('.method-card', {
-        scrollTrigger: { trigger: '.method-flow', start: 'top 85%' },
-        rotationY: -45,
-        z: -100,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.3,
-        ease: 'power2.out'
-    });
-
-    // 4. STUDIO: FLOATING PARALLAX
-    gsap.to('.team-floating', {
-        scrollTrigger: { trigger: '.studio-section', start: 'top bottom', end: 'bottom top', scrub: true },
-        y: -100
-    });
-    gsap.from('.member-profile', {
-        scrollTrigger: { trigger: '.studio-section', start: 'top 80%' },
-        scale: 0.9,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.4,
-        ease: 'elastic.out(1, 0.5)'
-    });
-
-    // 5. IMPACT: GLOW COUNTER
-    document.querySelectorAll('.counter').forEach(num => {
-        const target = parseInt(num.getAttribute('data-val'));
+    // 5. STATS: COUNT UP
+    document.querySelectorAll('.stat-num').forEach(num => {
+        const val = parseInt(num.getAttribute('data-val'));
         gsap.to(num, {
-            innerText: target,
-            duration: 2.5,
+            innerText: val,
+            duration: 2,
             snap: { innerText: 1 },
-            scrollTrigger: { trigger: num, start: 'top 90%' },
-            onUpdate: function() {
-                num.style.textShadow = `0 0 ${this.progress() * 20}px rgba(184, 158, 107, 0.4)`;
-            }
+            scrollTrigger: { trigger: num, start: 'top 90%' }
         });
-    });
-
-    // 6. FAQ: SKEWED REVEAL
-    gsap.from('.faq-card', {
-        scrollTrigger: { trigger: '.faq-list', start: 'top 90%' },
-        skewX: -10,
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out'
     });
 
     // LIGHTBOX SYSTEM
