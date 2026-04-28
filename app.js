@@ -260,7 +260,6 @@ window.addEventListener('load', () => {
 
     window.addEventListener('resize', () => {
         setCanvasSize();
-        // Redraw current frame on resize
         const hero = document.getElementById('hero');
         const heroHeight = hero.scrollHeight - window.innerHeight;
         const progress = Math.min(window.scrollY / heroHeight, 1);
@@ -277,52 +276,90 @@ window.addEventListener('load', () => {
         else document.querySelector('header').classList.remove('scrolled');
     });
 
-    // SERVICES SECTION ANIMATIONS
-    // Gold line grows on scroll
-    gsap.to('.gold-line', {
-        width: '80px',
-        duration: 1,
-        scrollTrigger: { trigger: '.services-luxury-section', start: 'top 80%' }
-    });
-
-    // Service columns stagger in (Fixing opacity to ensure it's visible)
+    // 1. SERVICES SECTION: STAGGERED SKEW & FADE
     gsap.from('.service-col', {
-        y: 40, duration: 0.8, stagger: 0.15, ease: 'power3.out',
-        scrollTrigger: { trigger: '.services-row', start: 'top 85%' }
+        scrollTrigger: { trigger: '.services-row', start: 'top 85%' },
+        y: 100,
+        opacity: 0,
+        skewY: 7,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: 'expo.out'
     });
-
-    // Service separator lines
+    
     gsap.from('.service-sep', {
-        scaleY: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: '.services-row', start: 'top 85%' }
+        scrollTrigger: { trigger: '.services-row', start: 'top 85%' },
+        scaleY: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power4.inOut'
     });
 
-    // Features cards
-    gsap.utils.toArray('.features-grid').forEach(grid => {
-        gsap.from(grid.querySelectorAll('.border-glow-card'), {
-            y: 60, opacity: 0, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: grid, start: 'top 85%' }
+    // 2. FEATURES GRID: SCALE & ROTATE REVEAL
+    gsap.utils.toArray('.border-glow-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: { trigger: card, start: 'top 90%' },
+            scale: 0.8,
+            rotationX: -45,
+            opacity: 0,
+            duration: 1,
+            delay: i * 0.1,
+            ease: 'back.out(1.7)'
         });
     });
 
-    // Process cards
+    // 3. PROCESS CARDS: HORIZONTAL SLIDE STAGGER
     gsap.from('.premium-process-card', {
-        y: 60, opacity: 0, duration: 0.8, stagger: 0.1,
-        scrollTrigger: { trigger: '.process-cards', start: 'top 85%' }
+        scrollTrigger: { trigger: '.process-cards', start: 'top 85%' },
+        x: (i) => i % 2 === 0 ? -100 : 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: 'power4.out'
     });
 
-    // Portfolio items
-    gsap.from('.port-item', {
-        scale: 0.95, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
-        scrollTrigger: { trigger: '.port-grid', start: 'top 85%' }
+    // 4. PORTFOLIO ITEMS: 3D REVEAL
+    gsap.utils.toArray('.port-item').forEach((item, i) => {
+        gsap.from(item, {
+            scrollTrigger: { trigger: item, start: 'top 90%' },
+            y: 50,
+            rotationY: 15,
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.out'
+        });
     });
 
-    // Title Reveals
+    // 5. TESTIMONIAL CARDS: SOFT ZOOM
+    gsap.from('.testi-card', {
+        scrollTrigger: { trigger: '.testimonials', start: 'top 80%' },
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
+
+    // 6. TITLES: CHARACTER RISE
     document.querySelectorAll('.gsap-title').forEach(title => {
         gsap.from(title.querySelectorAll('.split-word'), {
-            y: 50, opacity: 0, duration: 0.6, stagger: 0.05, ease: 'power3.out',
-            scrollTrigger: { trigger: title, start: 'top 90%' }
+            scrollTrigger: { trigger: title, start: 'top 90%' },
+            y: '100%',
+            rotation: 10,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.04,
+            ease: 'circ.out'
         });
+    });
+
+    // 7. CONTACT FORM: FOCUS REVEAL
+    gsap.from('.contact-form', {
+        scrollTrigger: { trigger: '.contact-form', start: 'top 85%' },
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power4.out'
     });
 
     // Smooth Scroll for nav links
