@@ -195,29 +195,31 @@ window.addEventListener('load', () => {
     setCanvasSize();
     preloadFrames();
 
-    // HERO SCROLL → FRAME SCRUB
-    ScrollTrigger.create({
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1,
-        onUpdate: (self) => {
-            const frameIndex = Math.min(
-                Math.floor(self.progress * (frameCount - 1)),
-                frameCount - 1
-            );
-            drawFrame(frameIndex);
-        }
-    });
+    // HERO SCROLL → FRAME SCRUB (Conditional)
+    if (document.getElementById('hero')) {
+        ScrollTrigger.create({
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            onUpdate: (self) => {
+                const frameIndex = Math.min(
+                    Math.floor(self.progress * (frameCount - 1)),
+                    frameCount - 1
+                );
+                drawFrame(frameIndex);
+            }
+        });
 
-    window.addEventListener('resize', () => {
-        setCanvasSize();
-        const hero = document.getElementById('hero');
-        const heroHeight = hero.scrollHeight - window.innerHeight;
-        const progress = Math.min(window.scrollY / heroHeight, 1);
-        const frameIndex = Math.min(Math.floor(progress * (frameCount - 1)), frameCount - 1);
-        drawFrame(frameIndex);
-    });
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            const hero = document.getElementById('hero');
+            const heroHeight = hero.scrollHeight - window.innerHeight;
+            const progress = Math.min(window.scrollY / heroHeight, 1);
+            const frameIndex = Math.min(Math.floor(progress * (frameCount - 1)), frameCount - 1);
+            drawFrame(frameIndex);
+        });
+    }
 
     // Split Text for title animations
     splitText('.gsap-title');
