@@ -66,53 +66,32 @@ function hideLoadingScreen() {
 }
 
 /* ═══════════════════════════════════════════
-   SCROLL REVEAL OBSERVER
-   ═══════════════════════════════════════════ */
-
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    reveals.forEach(el => observer.observe(el));
-}
-
-/* ═══════════════════════════════════════════
    COUNTER ANIMATION
    ═══════════════════════════════════════════ */
-
 function initCounters() {
-    const counters = document.querySelectorAll('.stat-num');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                entry.target.classList.add('counted');
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                const suffix = entry.target.textContent.includes('%') ? '%' : '+';
+    document.querySelectorAll('.stat-num').forEach(el => {
+        ScrollTrigger.create({
+            trigger: el,
+            start: 'top 90%',
+            once: true,
+            onEnter: () => {
+                const target = parseInt(el.getAttribute('data-target'));
+                const suffix = el.textContent.includes('%') ? '%' : '+';
                 let current = 0;
-                const step = Math.max(1, Math.floor(target / 60));
+                const step = Math.max(1, Math.floor(target / 50));
                 const timer = setInterval(() => {
                     current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    entry.target.textContent = current + suffix;
-                }, 25);
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    el.textContent = current + suffix;
+                }, 30);
             }
         });
-    }, { threshold: 0.5 });
-    counters.forEach(c => observer.observe(c));
+    });
 }
 
 /* ═══════════════════════════════════════════
    FILTER TABS
    ═══════════════════════════════════════════ */
-
 function initFilters() {
     const tabs = document.querySelectorAll('.filter-tab');
     const cards = document.querySelectorAll('.port-card');
@@ -125,7 +104,7 @@ function initFilters() {
                 const cat = card.getAttribute('data-category');
                 if (filter === 'all' || filter === cat) {
                     card.style.display = 'block';
-                    gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
+                    gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
                 } else {
                     gsap.to(card, { opacity: 0, y: 20, duration: 0.3, onComplete: () => { card.style.display = 'none'; } });
                 }
@@ -135,108 +114,118 @@ function initFilters() {
 }
 
 /* ═══════════════════════════════════════════
-   GSAP SCROLL ANIMATIONS
+   GSAP SCROLL ANIMATIONS — ALL SECTIONS
    ═══════════════════════════════════════════ */
+function initAnimations() {
 
-function initGSAPAnimations() {
-    // Portfolio cards stagger
-    gsap.utils.toArray('.port-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            y: 60, opacity: 0, scale: 0.92, duration: 0.8, delay: i * 0.1,
-            ease: 'back.out(1.4)'
-        });
+    // ── PORTFOLIO CARDS: Stagger Rise ──
+    gsap.from('.port-card', {
+        scrollTrigger: { trigger: '.port-grid', start: 'top 88%', once: true },
+        y: 80, opacity: 0, scale: 0.9, duration: 0.9, stagger: 0.15,
+        ease: 'back.out(1.4)'
     });
 
-    // Stats bar items
+    // ── STATS BAR: Slide Up ──
     gsap.from('.stat-item', {
-        scrollTrigger: { trigger: '.stats-bar', start: 'top 85%' },
-        y: 40, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out'
+        scrollTrigger: { trigger: '.stats-bar', start: 'top 88%', once: true },
+        y: 50, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out'
     });
 
-    // Why cards
-    gsap.utils.toArray('.why-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            y: 50, opacity: 0, rotationX: -15, duration: 0.8, delay: i * 0.1,
-            ease: 'power4.out'
-        });
+    // ── WHY CARDS: Rotate In ──
+    gsap.from('.why-card', {
+        scrollTrigger: { trigger: '.why-grid', start: 'top 88%', once: true },
+        y: 60, opacity: 0, rotationX: -20, duration: 0.9, stagger: 0.12,
+        ease: 'power4.out'
     });
 
-    // Process steps
+    // ── PROCESS LEFT: Slide from Left ──
+    gsap.from('.process-left', {
+        scrollTrigger: { trigger: '.process-layout', start: 'top 85%', once: true },
+        x: -80, opacity: 0, duration: 1, ease: 'power4.out'
+    });
+
+    // ── PROCESS STEPS: Stagger Down ──
     gsap.from('.process-step', {
-        scrollTrigger: { trigger: '.process-steps', start: 'top 85%' },
-        y: 30, opacity: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out'
+        scrollTrigger: { trigger: '.process-steps', start: 'top 88%', once: true },
+        y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out'
     });
 
-    // Process image parallax
+    // ── PROCESS IMAGE: Scale Up ──
+    gsap.from('.process-image', {
+        scrollTrigger: { trigger: '.process-image', start: 'top 90%', once: true },
+        scale: 0.85, opacity: 0, duration: 1, ease: 'power3.out'
+    });
+
+    // ── PROCESS IMAGE: Parallax ──
     const processImg = document.querySelector('.process-image img');
     if (processImg) {
-        gsap.fromTo(processImg, { y: 40 }, {
-            y: -40, ease: 'none',
+        gsap.fromTo(processImg, { y: 30 }, {
+            y: -30, ease: 'none',
             scrollTrigger: { trigger: '.process-image', start: 'top bottom', end: 'bottom top', scrub: 1.5 }
         });
     }
 
-    // Testimonial cards
-    gsap.utils.toArray('.testi-card-new').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            x: 80, opacity: 0, duration: 0.9, delay: i * 0.15, ease: 'expo.out'
-        });
+    // ── TESTIMONIAL FEATURED: Slide Left ──
+    gsap.from('.testi-featured', {
+        scrollTrigger: { trigger: '.testi-layout', start: 'top 85%', once: true },
+        x: -60, opacity: 0, duration: 1, ease: 'power4.out'
     });
 
-    // Testimonial featured image
-    const testiFeatured = document.querySelector('.testi-featured img');
-    if (testiFeatured) {
-        gsap.fromTo(testiFeatured, { scale: 1.1 }, {
+    // ── TESTIMONIAL CARDS: Slide Right ──
+    gsap.from('.testi-card-new', {
+        scrollTrigger: { trigger: '.testi-cards-col', start: 'top 88%', once: true },
+        x: 80, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'expo.out'
+    });
+
+    // ── TESTIMONIAL IMAGE ZOOM ──
+    const testiFeatImg = document.querySelector('.testi-featured img');
+    if (testiFeatImg) {
+        gsap.fromTo(testiFeatImg, { scale: 1.15 }, {
             scale: 1, ease: 'none',
             scrollTrigger: { trigger: '.testi-featured', start: 'top bottom', end: 'bottom top', scrub: 2 }
         });
     }
 
-    // Insight cards
-    gsap.utils.toArray('.insight-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            y: 60, opacity: 0, duration: 0.8, delay: i * 0.15, ease: 'power3.out'
-        });
+    // ── INSIGHT CARDS: Stagger Up ──
+    gsap.from('.insight-card', {
+        scrollTrigger: { trigger: '.insights-grid', start: 'top 88%', once: true },
+        y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out'
     });
 
-    // CTA banner
+    // ── CTA BANNER: Scale In ──
     gsap.from('.cta-banner', {
-        scrollTrigger: { trigger: '.cta-banner', start: 'top 85%' },
-        scale: 0.9, opacity: 0, duration: 1, ease: 'power4.out'
+        scrollTrigger: { trigger: '.cta-banner', start: 'top 88%', once: true },
+        scale: 0.88, opacity: 0, duration: 1, ease: 'power4.out'
     });
 
-    // Contact layout
+    // ── CONTACT FORM: Split Slide ──
     gsap.from('.contact-left', {
-        scrollTrigger: { trigger: '.contact-layout', start: 'top 80%' },
+        scrollTrigger: { trigger: '.contact-layout', start: 'top 85%', once: true },
         x: -60, opacity: 0, duration: 1, ease: 'power4.out'
     });
     gsap.from('.contact-right', {
-        scrollTrigger: { trigger: '.contact-layout', start: 'top 80%' },
+        scrollTrigger: { trigger: '.contact-layout', start: 'top 85%', once: true },
         x: 60, opacity: 0, duration: 1, delay: 0.2, ease: 'power4.out'
     });
 
-    // Trust bar items
+    // ── TRUST BAR: Rise ──
     gsap.from('.trust-item', {
-        scrollTrigger: { trigger: '.trust-bar', start: 'top 85%' },
-        y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out'
+        scrollTrigger: { trigger: '.trust-bar', start: 'top 90%', once: true },
+        y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out'
     });
 
-    // Title text animations
-    document.querySelectorAll('.title-lg, .title-xl').forEach(title => {
-        gsap.from(title, {
-            scrollTrigger: { trigger: title, start: 'top 90%' },
-            y: 30, opacity: 0, duration: 0.8, ease: 'power3.out'
+    // ── ALL TITLES: Slide Up ──
+    document.querySelectorAll('.title-lg, .title-xl').forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+            y: 30, opacity: 0, duration: 0.7, ease: 'power3.out'
         });
     });
 
-    // Label animations
-    document.querySelectorAll('.label-sm').forEach(label => {
-        gsap.from(label, {
-            scrollTrigger: { trigger: label, start: 'top 92%' },
+    // ── LABELS: Slide In ──
+    document.querySelectorAll('.label-sm').forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: { trigger: el, start: 'top 94%', once: true },
             x: -20, opacity: 0, duration: 0.5, ease: 'power2.out'
         });
     });
@@ -245,28 +234,27 @@ function initGSAPAnimations() {
 /* ═══════════════════════════════════════════
    HOVER EFFECTS
    ═══════════════════════════════════════════ */
-
 function initHoverEffects() {
-    // Port card tilt
+    // Card tilt
     document.querySelectorAll('.port-card').forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width - 0.5;
             const y = (e.clientY - rect.top) / rect.height - 0.5;
-            gsap.to(card, { rotationY: x * 8, rotationX: -y * 8, transformPerspective: 800, duration: 0.3, ease: 'power1.out' });
+            gsap.to(card, { rotationY: x * 8, rotationX: -y * 8, transformPerspective: 800, duration: 0.3 });
         });
         card.addEventListener('mouseleave', () => {
             gsap.to(card, { rotationY: 0, rotationX: 0, duration: 0.5, ease: 'power3.out' });
         });
     });
 
-    // Button magnetic effect
-    document.querySelectorAll('.btn-dark, .btn-gold-circle, .btn-outline').forEach(btn => {
+    // Magnetic buttons
+    document.querySelectorAll('.btn-dark, .btn-gold-circle, .btn-outline, .btn-header').forEach(btn => {
         btn.addEventListener('mousemove', e => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            gsap.to(btn, { x: x * 0.15, y: y * 0.15, duration: 0.3, ease: 'power2.out' });
+            gsap.to(btn, { x: x * 0.15, y: y * 0.15, duration: 0.3 });
         });
         btn.addEventListener('mouseleave', () => {
             gsap.to(btn, { x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
@@ -277,53 +265,48 @@ function initHoverEffects() {
 /* ═══════════════════════════════════════════
    INIT ON LOAD
    ═══════════════════════════════════════════ */
-
 window.addEventListener('load', () => {
     setCanvasSize();
     preloadFrames();
 
+    // Hero scroll → frame scrub
     if (document.getElementById('hero')) {
         ScrollTrigger.create({
             trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 1,
             onUpdate: (self) => {
-                const frameIndex = Math.min(Math.floor(self.progress * (frameCount - 1)), frameCount - 1);
-                drawFrame(frameIndex);
+                const fi = Math.min(Math.floor(self.progress * (frameCount - 1)), frameCount - 1);
+                drawFrame(fi);
             }
         });
         window.addEventListener('resize', () => {
             setCanvasSize();
             const hero = document.getElementById('hero');
             if (hero) {
-                const heroHeight = hero.scrollHeight - window.innerHeight;
-                const progress = Math.min(window.scrollY / heroHeight, 1);
-                const frameIndex = Math.min(Math.floor(progress * (frameCount - 1)), frameCount - 1);
-                drawFrame(frameIndex);
+                const hh = hero.scrollHeight - window.innerHeight;
+                const p = Math.min(window.scrollY / hh, 1);
+                drawFrame(Math.min(Math.floor(p * (frameCount - 1)), frameCount - 1));
             }
         });
     }
 
-    // Header scroll effect
+    // Scrolled header
     window.addEventListener('scroll', () => {
         const h = document.querySelector('header');
-        if (h) {
-            if (window.scrollY > 50) h.classList.add('scrolled');
-            else h.classList.remove('scrolled');
-        }
+        if (h) { window.scrollY > 50 ? h.classList.add('scrolled') : h.classList.remove('scrolled'); }
     });
 
-    // Init all systems
-    initScrollReveal();
+    // Init all
     initCounters();
     initFilters();
-    initGSAPAnimations();
+    initAnimations();
     initHoverEffects();
 
-    // Smooth scroll for nav
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
         });
     });
 });
