@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEMO | Ultra Modern Interior Design</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -18,16 +17,20 @@
         <div id="loaderText" class="loader-text">LOADING 0%</div>
     </div>
 
+    <!-- Header -->
     <header id="header">
         <a href="#" class="logo">DEMO <span>STUDIO</span></a>
         <nav class="nav-links">
-            <a href="#portfolio" class="hover-magnet">Portfolio</a>
-            <a href="#about" class="hover-magnet">About</a>
-            <a href="#services" class="hover-magnet">Services</a>
-            <a href="#process" class="hover-magnet">Process</a>
-            <a href="#reviews" class="hover-magnet">Reviews</a>
+            <a href="#portfolio" class="active">Our Projects</a>
+            <a href="#about">About</a>
+            <a href="#process">Process</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
         </nav>
-        <a href="#contact" class="btn-primary hover-magnet" style="padding:10px 24px; font-size:12px;">Start Project</a>
+        <div class="header-right">
+            <a href="#contact" class="btn-header">Let's Discuss <span>→</span></a>
+            <button class="menu-btn">☰</button>
+        </div>
     </header>
 
     <!-- Hero Section: Canvas Frame-by-Frame Scroll -->
@@ -38,243 +41,438 @@
         <div class="hero-overlay"></div>
     </section>
 
-    <!-- Portfolio -->
-    <section class="portfolio" id="portfolio">
+    <!-- ═══════════════════════════════════════════
+         SECTION 2: PORTFOLIO + STATS
+         ═══════════════════════════════════════════ -->
+    <section class="portfolio-section" id="portfolio">
         <div class="container">
-            <div class="port-header">
+            <div class="portfolio-top">
+                <div class="portfolio-top-left">
+                    <div class="label-sm">Our Projects</div>
+                    <h2 class="title-xl">Spaces that Inspire, <span class="gold-text">Designed to Perfection.</span></h2>
+                    <p class="text-body">We create timeless interiors that blend functionality with aesthetics to elevate the way you live, work & experience.</p>
+                    <br>
+                    <a href="#" class="btn-dark">Explore All Projects <span class="arrow">→</span></a>
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Projects</button>
+                    <button class="filter-tab" data-filter="residential">Residential</button>
+                    <button class="filter-tab" data-filter="commercial">Commercial</button>
+                    <button class="filter-tab" data-filter="hospitality">Hospitality</button>
+                </div>
+            </div>
+
+            <div class="port-grid" id="port-grid">
+                <div class="port-card reveal" data-category="residential">
+                    <img src="assets/port-1.png" alt="Serene Living">
+                    <div class="port-card-num">01</div>
+                    <div class="port-card-expand">⤢</div>
+                    <div class="port-card-info">
+                        <h4>Serene Living</h4>
+                        <p>Residential • Mumbai</p>
+                    </div>
+                    <div class="port-card-arrow"><button class="btn-gold-circle">→</button></div>
+                </div>
+                <div class="port-card reveal" data-category="residential">
+                    <img src="assets/port-2.png" alt="Urban Elegance">
+                    <div class="port-card-num">02</div>
+                    <div class="port-card-expand">⤢</div>
+                    <div class="port-card-info">
+                        <h4>Urban Elegance</h4>
+                        <p>Residential • Delhi</p>
+                    </div>
+                    <div class="port-card-arrow"><button class="btn-gold-circle">→</button></div>
+                </div>
+                <div class="port-card reveal" data-category="commercial">
+                    <img src="assets/port-3.png" alt="Studio Office">
+                    <div class="port-card-num">03</div>
+                    <div class="port-card-expand">⤢</div>
+                    <div class="port-card-info">
+                        <h4>Studio Office</h4>
+                        <p>Commercial • Bangalore</p>
+                    </div>
+                    <div class="port-card-arrow"><button class="btn-gold-circle">→</button></div>
+                </div>
+                <div class="port-card reveal" data-category="hospitality">
+                    <img src="assets/port-4.png" alt="The Olive Bistro">
+                    <div class="port-card-num">04</div>
+                    <div class="port-card-expand">⤢</div>
+                    <div class="port-card-info">
+                        <h4>The Olive Bistro</h4>
+                        <p>Hospitality • Goa</p>
+                    </div>
+                    <div class="port-card-arrow"><button class="btn-gold-circle">→</button></div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="stats-bar reveal">
+                <div class="stat-item">
+                    <div class="stat-icon">✦</div>
+                    <div>
+                        <div class="stat-num" data-target="250">0+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">◈</div>
+                    <div>
+                        <div class="stat-num" data-target="12">0+</div>
+                        <div class="stat-label">Years of Experience</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">◉</div>
+                    <div>
+                        <div class="stat-num" data-target="30">0+</div>
+                        <div class="stat-label">Design Experts</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⬡</div>
+                    <div>
+                        <div class="stat-num" data-target="98">0%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 3: WHY US
+         ═══════════════════════════════════════════ -->
+    <section class="why-section" id="about">
+        <div class="container">
+            <div class="why-top">
                 <div>
-                    <div class="label-sm">Selected Works</div>
-                    <h2 class="title-lg gsap-title" style="margin:0;">Our <span class="blue-text">Portfolio</span></h2>
+                    <div class="label-sm">Experience that Defines Us</div>
+                    <h2 class="title-lg">More Than Just <span class="gold-text">Beautiful</span> Spaces</h2>
                 </div>
-                <a href="projects.html" class="btn-primary hover-magnet" style="padding:14px 28px;">View All Projects</a>
+                <p class="text-body">We believe every space has a story. We design it to reflect who you are.</p>
             </div>
-            <div class="port-grid">
-                <div class="port-item large tilt-card">
-                    <img src="assets/port-1.png" alt="Penthouse" class="port-img">
-                    <div class="port-overlay">
-                        <div>
-                            <h3>The Obsidian Penthouse</h3>
-                            <span class="badge">New York</span>
-                        </div>
-                    </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-card-icon">✦</div>
+                    <h4>Tailored Designs</h4>
+                    <p>Custom solutions crafted around your lifestyle.</p>
                 </div>
-                <div class="port-item tilt-card">
-                    <img src="assets/port-2.png" alt="Hotel Lobby" class="port-img">
-                    <div class="port-overlay">
-                        <div>
-                            <h3>Azure Hotel Lobby</h3>
-                            <span class="badge">Dubai</span>
-                        </div>
-                    </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon">◈</div>
+                    <h4>Quality & Detail</h4>
+                    <p>Premium materials and meticulous craftsmanship.</p>
                 </div>
-                <div class="port-item tilt-card">
-                    <img src="assets/port-4.png" alt="Bedroom" class="port-img">
-                    <div class="port-overlay">
-                        <div>
-                            <h3>Panoramic Master Suite</h3>
-                            <span class="badge">Tokyo</span>
-                        </div>
-                    </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon">◉</div>
+                    <h4>Timely Delivery</h4>
+                    <p>On-time execution with transparency.</p>
                 </div>
-                <div class="port-item tilt-card">
-                    <img src="assets/port-3.png" alt="Kitchen" class="port-img">
-                    <div class="port-overlay">
-                        <div>
-                            <h3>Dark Minimalist Kitchen</h3>
-                            <span class="badge">Toronto</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="port-item tilt-card">
-                    <img src="assets/port-5.png" alt="Office" class="port-img">
-                    <div class="port-overlay">
-                        <div>
-                            <h3>Executive Suite</h3>
-                            <span class="badge">London</span>
-                        </div>
-                    </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon">⬡</div>
+                    <h4>Client Focused</h4>
+                    <p>Your vision, our priority — always.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Us -->
-    <section class="features" id="about">
-        <div class="container">
-            <div class="label-sm">Why Us</div>
-            <h2 class="title-lg gsap-title">Designed to <span class="blue-text">Inspire.</span><br>Built to <span class="blue-text">Last.</span></h2>
-            <div class="features-grid">
-                <div class="border-glow-card">
-                    <span class="edge-light"></span>
-                    <div class="border-glow-inner">
-                        <div class="f-icon">✦</div>
-                        <h3>Bespoke Vision</h3>
-                        <p class="text-body">Every project is a unique architectural masterpiece, designed specifically for your lifestyle and vision.</p>
-                    </div>
-                </div>
-                <div class="border-glow-card">
-                    <span class="edge-light"></span>
-                    <div class="border-glow-inner">
-                        <div class="f-icon">◈</div>
-                        <h3>Global Materials</h3>
-                        <p class="text-body">We source the finest hyper-modern materials globally, from Italian stone to Japanese joinery.</p>
-                    </div>
-                </div>
-                <div class="border-glow-card">
-                    <span class="edge-light"></span>
-                    <div class="border-glow-inner">
-                        <div class="f-icon">◉</div>
-                        <h3>3D Visualization</h3>
-                        <p class="text-body">Experience your future sanctuary in 8K cinematic detail before construction even begins.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services (Premium Horizontal Layout) -->
-    <section class="services-luxury-section" id="services">
-        <div class="container">
-            <div class="services-header">
-                <div class="label-sm">Our Services</div>
-                <h2 class="services-main-title gsap-title">Crafting <span class="gold-text">Excellence</span></h2>
-                <div class="gold-line"></div>
-            </div>
-            <div class="services-row">
-                <div class="service-col">
-                    <div class="service-bg-num">01</div>
-                    <div class="service-icon">◈</div>
-                    <h3 class="service-title">3D Visualization</h3>
-                    <div class="service-divider"></div>
-                    <p class="service-desc">Photorealistic renders that bring your vision to life before work begins</p>
-                    <a href="#" class="service-link">Learn More →</a>
-                </div>
-                <div class="service-sep"></div>
-                <div class="service-col">
-                    <div class="service-bg-num">02</div>
-                    <div class="service-icon">✦</div>
-                    <h3 class="service-title">Space Planning</h3>
-                    <div class="service-divider"></div>
-                    <p class="service-desc">Intelligent design that maximizes beauty and function in every square foot</p>
-                    <a href="#" class="service-link">Learn More →</a>
-                </div>
-                <div class="service-sep"></div>
-                <div class="service-col">
-                    <div class="service-bg-num">03</div>
-                    <div class="service-icon">◉</div>
-                    <h3 class="service-title">Furniture Curation</h3>
-                    <div class="service-divider"></div>
-                    <p class="service-desc">Bespoke pieces sourced from the world's most prestigious design ateliers</p>
-                    <a href="#" class="service-link">Learn More →</a>
-                </div>
-                <div class="service-sep"></div>
-                <div class="service-col">
-                    <div class="service-bg-num">04</div>
-                    <div class="service-icon">⬡</div>
-                    <h3 class="service-title">Lighting Design</h3>
-                    <div class="service-divider"></div>
-                    <p class="service-desc">Precision lighting that transforms spaces into immersive luxury experiences</p>
-                    <a href="#" class="service-link">Learn More →</a>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top:80px;">
-                <a href="#" class="btn-services hover-magnet">View All Services →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process -->
+    <!-- ═══════════════════════════════════════════
+         SECTION 4: PROCESS + IMAGE
+         ═══════════════════════════════════════════ -->
     <section class="process-section" id="process">
         <div class="container">
-            <div class="label-sm">Methodology</div>
-            <h2 class="title-lg gsap-title">The <span class="blue-text">Process</span></h2>
-            <div class="process-cards">
-                <div class="process-card premium-process-card">
-                    <div class="ppc-inner">
-                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #9333ea, #db2777, #2563eb);"></div>
-                        <div class="p-num">01</div>
-                        <h3 class="p-title">Discovery</h3>
-                        <p class="p-desc">Deep-dive consultation to align with your aesthetic, functional needs, and overarching vision.</p>
-                    </div>
+            <div class="process-layout">
+                <div class="process-left reveal-left">
+                    <div class="label-sm">Our Process</div>
+                    <h2 class="title-lg">Our <span class="gold-text">Design</span> Process</h2>
+                    <div style="width:40px;height:2px;background:var(--gold);margin-bottom:20px;"></div>
+                    <p class="text-body">A seamless journey from concept to completion. We ensure every detail is thoughtfully crafted to bring your vision to life.</p>
+                    <br>
+                    <a href="#" class="btn-dark">How We Work <span class="arrow">→</span></a>
                 </div>
-                <div class="process-card premium-process-card">
-                    <div class="ppc-inner">
-                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #06b6d4, #3b82f6, #9333ea);"></div>
-                        <div class="p-num">02</div>
-                        <h3 class="p-title">Concept & 3D</h3>
-                        <p class="p-desc">Hyper-realistic 8K renders and physical mood boards to lock in the material palette.</p>
+                <div class="reveal-right">
+                    <div class="process-steps" style="margin-bottom:40px;">
+                        <div class="process-step">
+                            <div class="process-step-icon">✦</div>
+                            <div class="process-step-line"></div>
+                            <h5>01</h5>
+                            <h6>Consultation</h6>
+                            <p>Understanding your needs, lifestyle & vision.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step-icon">◈</div>
+                            <div class="process-step-line"></div>
+                            <h5>02</h5>
+                            <h6>Concept & Design</h6>
+                            <p>Crafting creative concepts tailored to your space.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step-icon">◉</div>
+                            <div class="process-step-line"></div>
+                            <h5>03</h5>
+                            <h6>Planning & Detailing</h6>
+                            <p>Material selection & 3D visuals.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step-icon">⬡</div>
+                            <div class="process-step-line"></div>
+                            <h5>04</h5>
+                            <h6>Execution</h6>
+                            <p>Precision execution with quality & care.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step-icon">✧</div>
+                            <h5>05</h5>
+                            <h6>Handover</h6>
+                            <p>Delivering a space that exceeds expectations.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="process-card premium-process-card">
-                    <div class="ppc-inner">
-                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #f97316, #ef4444, #db2777);"></div>
-                        <div class="p-num">03</div>
-                        <h3 class="p-title">Execution</h3>
-                        <p class="p-desc">Precision construction management and global sourcing of premium furnishings.</p>
-                    </div>
-                </div>
-                <div class="process-card premium-process-card">
-                    <div class="ppc-inner">
-                        <div class="ppc-bg-glow" style="background: linear-gradient(to bottom right, #10b981, #3b82f6, #6366f1);"></div>
-                        <div class="p-num">04</div>
-                        <h3 class="p-title">Reveal</h3>
-                        <p class="p-desc">Flawless white-glove installation and final staging for the ultimate reveal.</p>
+                    <div class="process-image reveal-scale">
+                        <img src="assets/port-5.png" alt="Design Process">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Slider -->
-    <section class="testimonials" id="reviews">
-        <div class="container" style="text-align: center;">
-            <div class="testi-header">
-                <div class="label-sm">Client Stories</div>
-                <h2 class="title-lg gsap-title" style="margin:0;">What Our <span class="gold-text">Clients Say</span></h2>
-                <div class="rating-badge">
-                    <div class="stars">★★★★★</div>
-                    <span>4.9/5 Based on 30+ Global Projects</span>
+    <!-- ═══════════════════════════════════════════
+         SECTION 5: TESTIMONIALS
+         ═══════════════════════════════════════════ -->
+    <section class="testimonials-section" id="reviews">
+        <div class="container">
+            <div class="label-sm">Client Love</div>
+            <div class="why-top" style="margin-bottom:40px;">
+                <h2 class="title-lg">Words from Our <span class="gold-text">Happy Clients</span></h2>
+                <p class="text-body">We build more than just beautiful spaces — we build trust.</p>
+            </div>
+            <div class="testi-layout">
+                <div class="testi-featured reveal-left">
+                    <img src="assets/port-1.png" alt="Featured Testimonial">
+                    <div class="testi-featured-content">
+                        <div class="testi-featured-quote">❝</div>
+                        <h3>They turned our ideas into a beautiful reality. Every corner reflects elegance and functionality.</h3>
+                        <div class="testi-featured-author">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Client">
+                            <div>
+                                <span>Priya Mehta</span>
+                                <small>Mumbai</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-cards-col">
+                    <div class="testi-card-new reveal-right">
+                        <div class="quote-mark">❝</div>
+                        <div class="testi-card-header">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="Client">
+                            <div>
+                                <h5>Rohan Kapoor</h5>
+                                <small>Delhi</small>
+                            </div>
+                        </div>
+                        <div class="testi-card-stars">★★★★★</div>
+                        <p>Professional, creative and punctual — the team made the entire process seamless and enjoyable.</p>
+                    </div>
+                    <div class="testi-card-new reveal-right" style="transition-delay:.15s;">
+                        <div class="quote-mark">❝</div>
+                        <div class="testi-card-header">
+                            <img src="https://i.pravatar.cc/150?img=25" alt="Client">
+                            <div>
+                                <h5>Ananya Joshi</h5>
+                                <small>Bangalore</small>
+                            </div>
+                        </div>
+                        <div class="testi-card-stars">★★★★★</div>
+                        <p>They truly understood our vision and delivered a space that exceeded our expectations.</p>
+                    </div>
+                    <div class="testi-card-new reveal-right" style="transition-delay:.3s;">
+                        <div class="quote-mark">❝</div>
+                        <div class="testi-card-header">
+                            <img src="https://i.pravatar.cc/150?img=33" alt="Client">
+                            <div>
+                                <h5>Arjun Patel</h5>
+                                <small>London</small>
+                            </div>
+                        </div>
+                        <div class="testi-card-stars">★★★★★</div>
+                        <p>World-class quality. The 3D renders were identical to the final result — absolutely flawless.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="reviews-wrapper"></div>
-        </div>
-        <div style="text-align:center; margin-top:40px;">
-            <a href="#" class="btn-reviews-all hover-magnet">View All Stories →</a>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 6: INSIGHTS / BLOG
+         ═══════════════════════════════════════════ -->
+    <section class="insights-section">
+        <div class="container">
+            <div class="insights-top">
+                <div>
+                    <div class="label-sm">Our Insights</div>
+                    <h2 class="title-lg">Design. Inspire. <span class="gold-text">Repeat.</span></h2>
+                    <p class="text-body">Explore ideas, trends and tips to elevate your space.</p>
+                </div>
+                <a href="#" class="btn-outline">Explore Blog <span>→</span></a>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-card reveal">
+                    <div class="insight-card-img">
+                        <img src="assets/port-3.png" alt="Blog">
+                        <div class="insight-date"><strong>25</strong><span>MAY</span></div>
+                    </div>
+                    <div class="insight-card-body">
+                        <h4>Top 7 Interior Design Trends to Watch in 2026</h4>
+                        <a href="#">Read More →</a>
+                    </div>
+                </div>
+                <div class="insight-card reveal">
+                    <div class="insight-card-img">
+                        <img src="assets/port-4.png" alt="Blog">
+                        <div class="insight-date"><strong>18</strong><span>MAY</span></div>
+                    </div>
+                    <div class="insight-card-body">
+                        <h4>How to Maximize Space in Small Homes</h4>
+                        <a href="#">Read More →</a>
+                    </div>
+                </div>
+                <div class="insight-card reveal">
+                    <div class="insight-card-img">
+                        <img src="assets/port-5.png" alt="Blog">
+                        <div class="insight-date"><strong>10</strong><span>MAY</span></div>
+                    </div>
+                    <div class="insight-card-body">
+                        <h4>The Role of Lighting in Interior Design</h4>
+                        <a href="#">Read More →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="cta-banner reveal-scale">
+                <div class="cta-banner-left">
+                    <div class="label-sm">Ready to Start Your Project?</div>
+                    <h2>Let's Create Something <span class="gold-text">Extraordinary</span> Together</h2>
+                </div>
+                <div class="cta-banner-right">
+                    <p>Share your vision with us and let's design a space that truly inspires you.</p>
+                    <a href="#contact" class="btn-dark" style="background:#fff;color:var(--bg-dark);">Get In Touch <span>→</span></a>
+                    <div class="cta-avatars">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="">
+                        <img src="https://i.pravatar.cc/150?img=25" alt="">
+                        <div class="cta-count">50+</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer CTA with Form -->
-    <section class="cta-section" id="contact">
-        <div class="container cta-grid">
-            <div class="cta-left">
-                <div class="label-sm">Start Your Project</div>
-                <h2 class="cta-title gsap-title">Let's build<br><span class="blue-text">together.</span></h2>
-                <p class="text-body" style="font-size:1.2rem; margin-top:20px;">Ready to create your masterpiece? Fill out the form and our design team will contact you within 24 hours.</p>
+    <!-- ═══════════════════════════════════════════
+         SECTION 7: CONTACT FORM
+         ═══════════════════════════════════════════ -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-left">
+                    <div>
+                        <div class="label-sm" style="color:var(--gold);">Let's Design Your</div>
+                        <h2>Dream Space, <span class="gold-text">Together</span></h2>
+                        <p>Share your ideas with us and we'll turn them into beautiful, functional spaces tailored just for you.</p>
+                    </div>
+                    <div>
+                        <div class="contact-feature">
+                            <div class="contact-feature-icon">✦</div>
+                            <div>
+                                <h5>Personalized Designs</h5>
+                                <p>We design spaces that reflect your style and personality.</p>
+                            </div>
+                        </div>
+                        <div class="contact-feature">
+                            <div class="contact-feature-icon">◈</div>
+                            <div>
+                                <h5>End-to-End Support</h5>
+                                <p>From concept to completion, we've got you covered.</p>
+                            </div>
+                        </div>
+                        <div class="contact-feature">
+                            <div class="contact-feature-icon">◉</div>
+                            <div>
+                                <h5>Timely Delivery</h5>
+                                <p>We value your time and deliver on our promises.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div class="cta-avatars">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="">
+                            <img src="https://i.pravatar.cc/150?img=25" alt="">
+                        </div>
+                        <div>
+                            <div style="color:var(--gold);font-size:14px;">★★★★★</div>
+                            <small style="color:rgba(255,255,255,.6);font-size:12px;">Trusted by 200+ Happy Clients</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-right">
+                    <h3>Tell us about your project</h3>
+                    <p>Let's get to know about your space and requirements.</p>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="Enter your full name">
+                            </div>
+                            <div class="form-field">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="Enter your email address">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-field">
+                                <label>Project Type</label>
+                                <select>
+                                    <option value="" disabled selected>Select project type</option>
+                                    <option>Residential</option>
+                                    <option>Commercial</option>
+                                    <option>Hospitality</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field full">
+                                <label>Project Description</label>
+                                <textarea placeholder="Tell us about your project, your ideas, requirements..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-dark" style="width:fit-content;">Next Step <span class="arrow">→</span></button>
+                    </form>
+                </div>
             </div>
-            <div class="cta-right">
-                <form class="contact-form tilt-card">
-                    <div class="card-glow"></div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <select required>
-                            <option value="" disabled selected>Select Budget</option>
-                            <option value="50-100k">$50,000 - $100,000</option>
-                            <option value="100-250k">$100,000 - $250,000</option>
-                            <option value="250k+">$250,000+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Tell us about your project..." rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Submit Request</button>
-                </form>
+
+            <!-- Trust Bar -->
+            <div class="trust-bar">
+                <div class="trust-item reveal">
+                    <div class="trust-icon">✦</div>
+                    <div><h5>Free Consultation</h5><p>Discuss your project with our experts.</p></div>
+                </div>
+                <div class="trust-item reveal">
+                    <div class="trust-icon">◈</div>
+                    <div><h5>Custom Solutions</h5><p>Tailored designs that fit your lifestyle.</p></div>
+                </div>
+                <div class="trust-item reveal">
+                    <div class="trust-icon">◉</div>
+                    <div><h5>Transparent Pricing</h5><p>No hidden costs, just honest quotes.</p></div>
+                </div>
+                <div class="trust-item reveal">
+                    <div class="trust-icon">⬡</div>
+                    <div><h5>Dedicated Support</h5><p>We're with you every step of the way.</p></div>
+                </div>
             </div>
         </div>
     </section>
@@ -286,7 +484,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
