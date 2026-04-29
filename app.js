@@ -69,11 +69,15 @@ function hideLoadingScreen() {
    SWIPER INITIALIZATION
    ═══════════════════════════════════════════ */
 let portSwiper;
+let testiSwiper;
 function initSwiper() {
     if(document.querySelector('.port-swiper')){
         portSwiper = new Swiper('.port-swiper', {
             slidesPerView: 1.2,
             spaceBetween: 20,
+            mousewheel: {
+                forceToAxis: true,
+            },
             navigation: {
                 nextEl: '.swiper-button-next-custom',
                 prevEl: '.swiper-button-prev-custom',
@@ -81,6 +85,21 @@ function initSwiper() {
             breakpoints: {
                 640: { slidesPerView: 2.2, spaceBetween: 20 },
                 1024: { slidesPerView: 4.2, spaceBetween: 20 }
+            }
+        });
+    }
+
+    if(document.querySelector('.testi-slider')){
+        testiSwiper = new Swiper('.testi-slider', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.testi-next',
+                prevEl: '.testi-prev',
+            },
+            breakpoints: {
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 20 }
             }
         });
     }
@@ -176,12 +195,7 @@ function initAnimations() {
         y: 50, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'back.out(2)'
     });
 
-    // ── WHY CARDS: 3D Rotate In ──
-    gsap.from('.why-card', {
-        scrollTrigger: { trigger: '.why-grid', start: 'top 88%', toggleActions: ta },
-        y: 60, opacity: 0, rotationY: 45, transformPerspective: 1000, duration: 0.9, stagger: 0.15,
-        ease: 'power3.out'
-    });
+
 
     // ── PROCESS LEFT: Slide from Left ──
     gsap.from('.process-left', {
@@ -218,7 +232,7 @@ function initAnimations() {
 
     // ── TESTIMONIAL CARDS: Flip In ──
     gsap.from('.testi-card', {
-        scrollTrigger: { trigger: '.testi-cards-row', start: 'top 88%', toggleActions: ta },
+        scrollTrigger: { trigger: '.testi-slider', start: 'top 88%', toggleActions: ta },
         rotationX: -90, transformOrigin: 'top center', opacity: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.2)'
     });
 
