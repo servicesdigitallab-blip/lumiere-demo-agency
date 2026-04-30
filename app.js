@@ -289,12 +289,7 @@ function initAnimations() {
         rotationX: -90, transformOrigin: 'top center', opacity: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.2)'
     });
 
-    // ── INSIGHT CARDS: Stagger Up & Scale ──
-    gsap.from('.blog-card', {
-        scrollTrigger: { trigger: '.blog-grid', start: 'top 88%', toggleActions: ta },
-        y: 80, scale: 0.9, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out'
-    });
-
+    // Removed blog card animation to prevent opacity bug
     // ── CTA BANNER: Slide Up ──
     gsap.from('.cta-banner', {
         scrollTrigger: { trigger: '.cta-banner', start: 'top 88%', toggleActions: ta },
