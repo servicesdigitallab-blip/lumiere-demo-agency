@@ -90,6 +90,7 @@ function initSwiper() {
     }
 
     if(document.querySelector('.testi-slider')){
+        loadReviews();
         testiSwiper = new Swiper('.testi-slider', {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -103,6 +104,58 @@ function initSwiper() {
             }
         });
     }
+}
+
+/* ═══════════════════════════════════════════
+   DYNAMIC REVIEWS
+   ═══════════════════════════════════════════ */
+function loadReviews() {
+    const grid = document.getElementById('testi-grid');
+    if (!grid) return;
+
+    const names = ["Vikram Sharma", "Ananya Joshi", "Arjun Patel", "Meera Kapoor", "Rahul Verma", "Neha Desai", "Siddharth Rao", "Pooja Singh", "Rohan Mehta", "Kavya Iyer", "Suresh Kumar", "Aditi Rao", "Karan Singh", "Nisha Patel", "Aman Gupta", "Simran Kaur", "Tariq Ali", "Priyanka Desai", "Rajiv Menon", "Sneha Reddy"];
+    const cities = ["Delhi", "Bangalore", "London", "Pune", "Mumbai", "Ahmedabad", "Hyderabad", "Jaipur", "Chennai", "Kolkata", "Surat", "Lucknow", "Kanpur", "Nagpur", "Indore", "Thane", "Bhopal", "Visakhapatnam", "Pimpri", "Patna"];
+    const comments = [
+        "The team completely redefined our living space. Their attention to natural lighting made our apartment feel twice as large. Highly recommended!",
+        "They truly understood our vision for a minimalist office environment. The project was delivered ahead of schedule.",
+        "World-class quality. The 3D renders were identical to the final result. The execution was absolutely flawless.",
+        "From the initial design discussions to the final handover, the team was incredibly professional.",
+        "Brilliant execution. They managed everything from civil work to styling. We didn't have to worry about a thing.",
+        "Their design sensibilities are unparalleled. Our boutique feels like a piece of art now.",
+        "Extremely professional and transparent approach. Highly recommend their commercial space expertise.",
+        "Demo Interior gave our heritage home a perfect modern touch without losing its original charm.",
+        "A truly remarkable transformation! The colors, the textures, everything came together perfectly.",
+        "I was blown away by their creativity and dedication. Best interior design team we have ever hired."
+    ];
+
+    let html = '';
+    // Generate 40 reviews
+    for (let i = 0; i < 40; i++) {
+        const name = names[i % names.length];
+        const city = cities[(i * 3) % cities.length];
+        const comment = comments[i % comments.length];
+        // Mix of 5 stars and 4 stars
+        const stars = (i % 3 === 0) ? "★★★★☆" : "★★★★★";
+        const avatarImg = 10 + (i % 60);
+
+        html += `
+        <div class="swiper-slide">
+            <div class="testi-card">
+                <div class="qm">❝</div>
+                <div class="testi-card-head">
+                    <img src="https://i.pravatar.cc/150?img=${avatarImg}" alt="Client">
+                    <div>
+                        <h5>${name}</h5>
+                        <small>${city}</small>
+                    </div>
+                </div>
+                <div class="stars">${stars}</div>
+                <p>${comment}</p>
+            </div>
+        </div>`;
+    }
+
+    grid.innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════
