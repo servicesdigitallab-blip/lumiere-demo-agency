@@ -283,12 +283,7 @@ function initAnimations() {
         x: -100, opacity: 0, filter: 'blur(10px)', duration: 1, ease: 'power4.out'
     });
 
-    // ── TESTIMONIAL CARDS: Flip In ──
-    gsap.from('.testi-card', {
-        scrollTrigger: { trigger: '.testi-slider', start: 'top 88%', toggleActions: ta },
-        rotationX: -90, transformOrigin: 'top center', opacity: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.2)'
-    });
-
+    // Removed testi-card animation to prevent opacity bug
     // Removed blog card animation to prevent opacity bug
     // ── CTA BANNER: Slide Up ──
     gsap.from('.cta-banner', {
@@ -382,7 +377,7 @@ function initLightbox() {
 /* ═══════════════════════════════════════════
    INIT ON LOAD
    ═══════════════════════════════════════════ */
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     setCanvasSize();
     preloadFrames();
 
