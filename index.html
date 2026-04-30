@@ -18,20 +18,37 @@
         <div id="loaderText" class="loader-text">LOADING 0%</div>
     </div>
 
-    <!-- Header -->
-    <header id="header">
-        <a href="#" class="logo">DEMO <span>INTERIOR</span></a>
-        <nav class="nav-links">
-            <a href="#hero">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio" class="active">Our Projects</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <div class="header-right">
-            <a href="#contact" class="btn-header">Let's Discuss <span>→</span></a>
-            <button class="menu-btn">☰</button>
+    <!-- Premium Header -->
+    <header id="header" class="premium-header">
+        <div class="nav-container">
+            <!-- Left: Logo -->
+            <div class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 12H5V20C5 21.1 5.9 22 7 22H17C18.1 22 19 21.1 19 20V12H22L12 2Z" fill="#0F0F0F"/>
+                    <path d="M12 9V14" stroke="#C6A87D" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="logo-text">
+                    <strong>DEMO INTERIOR</strong>
+                    <span>INTERIOR DESIGN</span>
+                </div>
+            </div>
+
+            <!-- Center: Pill Menu -->
+            <nav class="nav-pill">
+                <a href="#portfolio" class="active">Portfolio<span class="dot"></span></a>
+                <a href="#about">About<span class="dot"></span></a>
+                <a href="#services">Services<span class="dot"></span></a>
+                <a href="#process">Process<span class="dot"></span></a>
+                <a href="#testi-slider">Reviews<span class="dot"></span></a>
+            </nav>
+
+            <!-- Right: CTA + Menu Icon -->
+            <div class="nav-right">
+                <a href="#contact" class="btn-start">START PROJECT</a>
+                <button class="menu-btn-round">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
