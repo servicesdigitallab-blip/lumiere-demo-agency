@@ -401,9 +401,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Header Load Animation
+    gsap.from('.premium-header', { y: -100, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.2 });
+
     // Scrolled header
     window.addEventListener('scroll', () => {
-        const h = document.querySelector('header');
+        const h = document.querySelector('.premium-header');
         if (h) { window.scrollY > 50 ? h.classList.add('scrolled') : h.classList.remove('scrolled'); }
     });
 
