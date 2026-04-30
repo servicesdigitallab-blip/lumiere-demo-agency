@@ -199,6 +199,15 @@ header.scrolled{padding:14px 5%;background:rgba(250,248,245,.95);backdrop-filter
 
 .footer-bottom{padding:24px 5%;display:flex;justify-content:space-between;border-top:1px solid var(--border);font-size:13px;color:var(--tm)}
 
+/* ── Lightbox ── */
+#lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;backdrop-filter:blur(5px)}
+#lightbox.active{opacity:1;pointer-events:all}
+#lightbox img{max-width:90%;max-height:90vh;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s ease}
+#lightbox.active img{transform:scale(1)}
+#lightbox-close{position:absolute;top:30px;right:40px;color:#fff;font-size:40px;cursor:pointer;font-family:sans-serif;line-height:1;transition:color 0.3s}
+#lightbox-close:hover{color:var(--gold)}
+.port-card img, .blog-card-img img, .process-image img{cursor:pointer;}
+
 /* Responsive */
 @media(max-width:1024px){
 .nav-links{display:none}.port-card{min-width:calc(50% - 10px)}.stats-row{gap:24px}
