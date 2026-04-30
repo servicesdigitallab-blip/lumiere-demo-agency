@@ -300,6 +300,38 @@ function initHoverEffects() {
 }
 
 /* ═══════════════════════════════════════════
+   LIGHTBOX FUNCTIONALITY
+   ═══════════════════════════════════════════ */
+function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('lightbox-close');
+    if(!lightbox || !lightboxImg) return;
+
+    // Select images from portfolio, blog, and process
+    const images = document.querySelectorAll('.port-card img, .blog-card-img img, .process-image img, .testi-big-img img');
+    
+    images.forEach(img => {
+        img.addEventListener('click', (e) => {
+            lightboxImg.src = e.target.src;
+            lightbox.classList.add('active');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        setTimeout(() => lightboxImg.src = '', 300);
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            setTimeout(() => lightboxImg.src = '', 300);
+        }
+    });
+}
+
+/* ═══════════════════════════════════════════
    INIT ON LOAD
    ═══════════════════════════════════════════ */
 window.addEventListener('load', () => {
@@ -338,13 +370,29 @@ window.addEventListener('load', () => {
     initFilters();
     initAnimations();
     initHoverEffects();
+    initLightbox();
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', function(e) {
             e.preventDefault();
-            const t = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const t = document.querySelector(targetId);
             if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
         });
     });
+
+    // Explore All Projects Button
+    const exploreBtn = document.getElementById('btn-explore-all');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const allFilter = document.querySelector('.filter-tab[data-filter="all"]');
+            if (allFilter) allFilter.click();
+            // Scroll to portfolio section smoothly
+            const t = document.querySelector('#portfolio');
+            if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
+        });
+    }
 });
