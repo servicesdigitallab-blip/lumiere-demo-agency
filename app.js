@@ -142,7 +142,7 @@ function loadReviews() {
         <div class="swiper-slide">
             <div class="testi-card">
                 <div class="qm">❝</div>
-                <div class="testi-card-head">
+                <div class="testi-author">
                     <img src="https://i.pravatar.cc/150?img=${avatarImg}" alt="Client">
                     <div>
                         <h5>${name}</h5>
