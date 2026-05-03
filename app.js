@@ -202,32 +202,52 @@ function initAnimations() {
 
 
 
-    // ── BALANCED PROCESS: Horizontal Pinned Scroll ──
-    const processContainer = document.querySelector('.process-horizontal-container');
-    if (processContainer) {
-        gsap.to(processContainer, {
-            x: () => -(processContainer.scrollWidth - processContainer.clientWidth),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".process-section",
-                start: "top 100px",
-                end: () => `+=${processContainer.scrollWidth}`,
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1
-            }
+    // ── ULTIMATE PROCESS: Scrollytelling ──
+    const scrollySteps = document.querySelectorAll('.scrolly-step');
+    const scrollyImgs = document.querySelectorAll('.scrolly-img');
+
+    if (scrollySteps.length > 0) {
+        // Pin the container
+        ScrollTrigger.create({
+            trigger: ".process-section",
+            start: "top top",
+            end: "bottom bottom",
+            pin: ".scrolly-visuals"
         });
 
-        gsap.from('.process-card-premium', {
-            scrollTrigger: { trigger: '.process-horizontal-container', start: 'top 80%', toggleActions: ta },
-            y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out'
+        // Step Animations
+        scrollySteps.forEach((step, i) => {
+            const card = step.querySelector('.scrolly-card');
+            const stepNum = step.getAttribute('data-step');
+
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: "top 80%",
+                    end: "top 20%",
+                    toggleActions: "play reverse play reverse",
+                    onToggle: self => {
+                        if (self.isActive) {
+                            scrollyImgs.forEach(img => img.classList.remove('active'));
+                            document.querySelector(`.scrolly-img[data-step="${stepNum}"]`).classList.add('active');
+                        }
+                    }
+                },
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power4.out"
+            });
         });
     }
 
-    // ── TESTIMONIAL GRID: Stagger Rise ──
-    gsap.from('.testi-card-glass', {
-        scrollTrigger: { trigger: '.testi-grid-premium', start: 'top 85%', toggleActions: ta },
-        y: 40, opacity: 0, stagger: 0.15, duration: 1, ease: 'power4.out'
+    // ── ULTIMATE TESTIMONIALS: Floating Entrance ──
+    gsap.from('.marquee-container', {
+        scrollTrigger: { trigger: '.testi-section', start: 'top 85%', toggleActions: ta },
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power4.out'
     });
 
     // Removed testi-card animation to prevent opacity bug
