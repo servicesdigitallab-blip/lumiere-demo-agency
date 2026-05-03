@@ -90,7 +90,6 @@ function initSwiper() {
     }
 
     if(document.querySelector('.testi-slider')){
-        initMagTestimonials();
         testiSwiper = new Swiper('.testi-slider', {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -109,63 +108,7 @@ function initSwiper() {
 /* ═══════════════════════════════════════════
    DYNAMIC REVIEWS
    ═══════════════════════════════════════════ */
-/* ═══════════════════════════════════════════
-   TESTIMONIAL SYSTEM (MAGAZINE STYLE)
-   ═══════════════════════════════════════════ */
-const magReviews = [
-    {
-        name: "Priya Mehta",
-        location: "MUMBAI, INDIA",
-        quote: "Demo Interior turned our ideas into a beautiful reality. Every corner reflects elegance and functionality. Their attention to detail is truly world-class.",
-        img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=80"
-    },
-    {
-        name: "Vikram Sharma",
-        location: "DELHI, INDIA",
-        quote: "They truly understood our vision for a minimalist office environment. The project was delivered ahead of schedule and exceeded every expectation.",
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
-    },
-    {
-        name: "Ananya Joshi",
-        location: "BANGALORE, INDIA",
-        quote: "World-class quality. The 3D renders were identical to the final result. The execution was absolutely flawless and the team was a joy to work with.",
-        img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1000&q=80"
-    }
-];
-
-let activeMagIndex = 0;
-
-function initMagTestimonials() {
-    const prevBtn = document.getElementById('mag-prev');
-    const nextBtn = document.getElementById('mag-next');
-    if (!prevBtn || !nextBtn) return;
-
-    prevBtn.addEventListener('click', () => {
-        activeMagIndex = (activeMagIndex - 1 + magReviews.length) % magReviews.length;
-        updateMagReview();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        activeMagIndex = (activeMagIndex + 1) % magReviews.length;
-        updateMagReview();
-    });
-}
-
-function updateMagReview() {
-    const review = magReviews[activeMagIndex];
-    const container = document.getElementById('testi-mag-container');
-    
-    gsap.to(container, {
-        opacity: 0, x: -30, duration: 0.5, onComplete: () => {
-            document.getElementById('mag-active-quote').textContent = `"${review.quote}"`;
-            document.getElementById('mag-active-img').src = review.img;
-            document.getElementById('mag-active-name').textContent = review.name;
-            document.getElementById('mag-active-location').textContent = review.location;
-            
-            gsap.to(container, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' });
-        }
-    });
-}
+/* Testimonial data removed as it is now static for stability */
 
 /* ═══════════════════════════════════════════
    COUNTER ANIMATION
@@ -259,26 +202,32 @@ function initAnimations() {
 
 
 
-    // ── ULTIMATE PROCESS: Full Screen Reveals ──
-    document.querySelectorAll('.process-step-full').forEach((step, i) => {
-        const content = step.querySelector('.process-content-premium');
-        const img = step.querySelector('.process-bg-img img');
-
-        gsap.from(content, {
-            scrollTrigger: { trigger: step, start: 'top 60%', toggleActions: ta },
-            x: -100, opacity: 0, duration: 1.5, ease: 'power4.out'
+    // ── BALANCED PROCESS: Horizontal Pinned Scroll ──
+    const processContainer = document.querySelector('.process-horizontal-container');
+    if (processContainer) {
+        gsap.to(processContainer, {
+            x: () => -(processContainer.scrollWidth - processContainer.clientWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".process-section",
+                start: "top 100px",
+                end: () => `+=${processContainer.scrollWidth}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
+            }
         });
 
-        gsap.fromTo(img, { scale: 1.2, opacity: 0.3 }, {
-            scrollTrigger: { trigger: step, start: 'top bottom', end: 'bottom top', scrub: true },
-            scale: 1, opacity: 0.6, ease: 'none'
+        gsap.from('.process-card-premium', {
+            scrollTrigger: { trigger: '.process-horizontal-container', start: 'top 80%', toggleActions: ta },
+            y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out'
         });
-    });
+    }
 
-    // ── MAGAZINE TESTIMONIALS: Slide Reveal ──
-    gsap.from('.testi-magazine', {
-        scrollTrigger: { trigger: '.testi-section', start: 'top 80%', toggleActions: ta },
-        y: 60, opacity: 0, duration: 1.2, ease: 'power4.out'
+    // ── TESTIMONIAL GRID: Stagger Rise ──
+    gsap.from('.testi-card-glass', {
+        scrollTrigger: { trigger: '.testi-grid-premium', start: 'top 85%', toggleActions: ta },
+        y: 40, opacity: 0, stagger: 0.15, duration: 1, ease: 'power4.out'
     });
 
     // Removed testi-card animation to prevent opacity bug
