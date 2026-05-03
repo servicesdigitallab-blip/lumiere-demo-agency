@@ -142,167 +142,178 @@ section{padding:100px 0;position:relative;overflow:hidden}
 .process-section{padding:80px 0;background:var(--bg-w);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .process-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
 .process-left{position:sticky;top:140px}
-/* ── Process (Balanced Horizontal) ── */
+/* ── Section 4: Process (Scrollytelling) ── */
 .process-section {
-    padding: 140px 0;
-    background: #0F0F0F;
+    position: relative;
+    background: #0A0A0A;
     color: #fff;
     overflow: hidden;
 }
 
-.process-horizontal-container {
-    display: flex;
-    gap: 50px;
-    padding: 20px 0;
-}
-
-.process-card-premium {
-    min-width: 450px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 40px;
-    padding: 50px;
+.scrolly-container {
     position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    height: 400vh; /* 4 steps */
 }
 
-.process-card-premium:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: var(--gold);
-    transform: translateY(-15px);
-}
-
-.process-card-img {
+.scrolly-visuals {
+    position: sticky;
+    top: 0;
     width: 100%;
-    height: 220px;
-    border-radius: 24px;
-    margin-bottom: 30px;
+    height: 100vh;
     overflow: hidden;
+    z-index: 1;
 }
 
-.process-card-img img {
+.scrolly-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1s ease;
-}
-
-.process-card-premium:hover .process-card-img img {
+    opacity: 0;
     transform: scale(1.1);
+    transition: opacity 0.8s ease, transform 1.2s ease;
 }
 
-.process-card-num {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-family: var(--fh);
-    font-size: 60px;
-    font-weight: 900;
-    color: rgba(198, 168, 125, 0.15);
+.scrolly-img.active {
+    opacity: 0.6;
+    transform: scale(1);
 }
 
-.process-card-premium h3 {
-    font-family: var(--fh);
-    font-size: 32px;
-    color: var(--gold);
-    margin-bottom: 15px;
-}
-
-.process-card-premium p {
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.7;
-    font-size: 16px;
-}
-
-/* ── Testimonials (Floating Glass Grid) ── */
-.testi-section {
-    padding: 140px 0;
-    background: #fff;
+.scrolly-content {
     position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
 
-.testi-grid-premium {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.testi-card-glass {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 32px;
-    padding: 40px;
-    transition: all 0.4s ease;
+.scrolly-step {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10%;
 }
 
-.testi-card-glass:hover {
-    border-color: var(--gold);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-    transform: translateY(-10px);
+.scrolly-card {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 60px;
+    transform: translateY(50px);
+    opacity: 0;
 }
 
-.testi-card-glass .quote-icon-sm {
+.scrolly-num {
     font-family: var(--fh);
-    font-size: 60px;
-    color: var(--gold);
-    opacity: 0.15;
+    font-size: 80px;
     line-height: 1;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.scrolly-card h3 {
+    font-size: 42px;
+    font-family: var(--fh);
     margin-bottom: 20px;
 }
 
-.testi-card-glass p {
-    font-size: 16px;
+.scrolly-card p {
+    font-size: 18px;
     line-height: 1.8;
-    color: #333;
-    font-style: italic;
-    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.testi-card-author {
+/* ── Section 5: Testimonials (Luxury Marquee) ── */
+.testi-section {
+    padding: 140px 0;
+    background: #fff;
+    overflow: hidden;
+}
+
+.testi-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.marquee-container {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: marquee-flow 40s linear infinite;
+}
+
+.marquee-container:hover {
+    animation-play-state: paused;
+}
+
+.testi-card-premium {
+    width: 450px;
+    background: #FDFCF9;
+    border: 1px solid #EAEAEA;
+    border-radius: 40px;
+    padding: 50px;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.testi-card-premium:hover {
+    transform: translateY(-20px) scale(1.02);
+    border-color: var(--gold);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+}
+
+.testi-quote-mark {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    font-size: 80px;
+    font-family: var(--fh);
+    color: var(--gold);
+    opacity: 0.1;
+}
+
+.testi-card-premium p {
+    font-size: 18px;
+    line-height: 1.7;
+    font-style: italic;
+    color: #1A1A1A;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.testi-client-info {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
-.testi-card-author img {
-    width: 50px;
-    height: 50px;
+.testi-client-info img {
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--gold);
 }
 
-.testi-card-author h5 {
+.testi-client-info h5 {
+    font-size: 20px;
     font-family: var(--fh);
-    font-size: 18px;
     margin: 0;
 }
 
-.testi-card-author span {
-    font-size: 12px;
+.testi-client-info span {
+    font-size: 14px;
     color: var(--tm);
     text-transform: uppercase;
 }
 
-.testi-featured {
-    grid-column: span 2;
-    background: var(--bg-dark);
-    color: #fff;
-}
-
-.testi-featured p {
-    color: rgba(255,255,255,0.8);
-    font-size: 22px;
-}
-
-.testi-featured .testi-card-author h5 {
-    color: #fff;
+@keyframes marquee-flow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 /* ── Blog (Premium Floating) ── */
