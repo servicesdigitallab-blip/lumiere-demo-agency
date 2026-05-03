@@ -90,7 +90,7 @@ function initSwiper() {
     }
 
     if(document.querySelector('.testi-slider')){
-        initTestimonialSwitcher();
+        initMagTestimonials();
         testiSwiper = new Swiper('.testi-slider', {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -110,59 +110,59 @@ function initSwiper() {
    DYNAMIC REVIEWS
    ═══════════════════════════════════════════ */
 /* ═══════════════════════════════════════════
-   TESTIMONIAL SYSTEM
+   TESTIMONIAL SYSTEM (MAGAZINE STYLE)
    ═══════════════════════════════════════════ */
-const premiumReviews = [
+const magReviews = [
     {
         name: "Priya Mehta",
         location: "MUMBAI, INDIA",
         quote: "Demo Interior turned our ideas into a beautiful reality. Every corner reflects elegance and functionality. Their attention to detail is truly world-class.",
-        img: "https://i.pravatar.cc/150?img=5"
+        img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=80"
     },
     {
         name: "Vikram Sharma",
         location: "DELHI, INDIA",
         quote: "They truly understood our vision for a minimalist office environment. The project was delivered ahead of schedule and exceeded every expectation.",
-        img: "https://i.pravatar.cc/150?img=11"
+        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
     },
     {
         name: "Ananya Joshi",
         location: "BANGALORE, INDIA",
         quote: "World-class quality. The 3D renders were identical to the final result. The execution was absolutely flawless and the team was a joy to work with.",
-        img: "https://i.pravatar.cc/150?img=32"
+        img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1000&q=80"
     }
 ];
 
-let activeReviewIndex = 0;
+let activeMagIndex = 0;
 
-function initTestimonialSwitcher() {
-    const prevBtn = document.getElementById('testi-prev-btn');
-    const nextBtn = document.getElementById('testi-next-btn');
+function initMagTestimonials() {
+    const prevBtn = document.getElementById('mag-prev');
+    const nextBtn = document.getElementById('mag-next');
     if (!prevBtn || !nextBtn) return;
 
     prevBtn.addEventListener('click', () => {
-        activeReviewIndex = (activeReviewIndex - 1 + premiumReviews.length) % premiumReviews.length;
-        updateReview();
+        activeMagIndex = (activeMagIndex - 1 + magReviews.length) % magReviews.length;
+        updateMagReview();
     });
 
     nextBtn.addEventListener('click', () => {
-        activeReviewIndex = (activeReviewIndex + 1) % premiumReviews.length;
-        updateReview();
+        activeMagIndex = (activeMagIndex + 1) % magReviews.length;
+        updateMagReview();
     });
 }
 
-function updateReview() {
-    const review = premiumReviews[activeReviewIndex];
-    const container = document.getElementById('testi-active-container');
+function updateMagReview() {
+    const review = magReviews[activeMagIndex];
+    const container = document.getElementById('testi-mag-container');
     
     gsap.to(container, {
-        opacity: 0, y: 20, duration: 0.4, onComplete: () => {
-            document.getElementById('active-quote').textContent = `"${review.quote}"`;
-            document.getElementById('active-img').src = review.img;
-            document.getElementById('active-name').textContent = review.name;
-            document.getElementById('active-location').textContent = review.location;
+        opacity: 0, x: -30, duration: 0.5, onComplete: () => {
+            document.getElementById('mag-active-quote').textContent = `"${review.quote}"`;
+            document.getElementById('mag-active-img').src = review.img;
+            document.getElementById('mag-active-name').textContent = review.name;
+            document.getElementById('mag-active-location').textContent = review.location;
             
-            gsap.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+            gsap.to(container, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' });
         }
     });
 }
@@ -259,32 +259,26 @@ function initAnimations() {
 
 
 
-    // ── PREMIUM PROCESS: Horizontal Scroll ──
-    const stepsContainer = document.querySelector('.process-steps-horizontal');
-    if (stepsContainer) {
-        gsap.to(stepsContainer, {
-            x: () => -(stepsContainer.scrollWidth - stepsContainer.clientWidth),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".process-section",
-                start: "top top",
-                end: () => `+=${stepsContainer.scrollWidth}`,
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1
-            }
+    // ── ULTIMATE PROCESS: Full Screen Reveals ──
+    document.querySelectorAll('.process-step-full').forEach((step, i) => {
+        const content = step.querySelector('.process-content-premium');
+        const img = step.querySelector('.process-bg-img img');
+
+        gsap.from(content, {
+            scrollTrigger: { trigger: step, start: 'top 60%', toggleActions: ta },
+            x: -100, opacity: 0, duration: 1.5, ease: 'power4.out'
         });
 
-        gsap.from('.process-step-premium', {
-            scrollTrigger: { trigger: '.process-steps-horizontal', start: 'top 80%', toggleActions: ta },
-            opacity: 0, x: 50, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+        gsap.fromTo(img, { scale: 1.2, opacity: 0.3 }, {
+            scrollTrigger: { trigger: step, start: 'top bottom', end: 'bottom top', scrub: true },
+            scale: 1, opacity: 0.6, ease: 'none'
         });
-    }
+    });
 
-    // ── PREMIUM TESTIMONIALS: Center Spotlight ──
-    gsap.from('.testi-center-stage', {
+    // ── MAGAZINE TESTIMONIALS: Slide Reveal ──
+    gsap.from('.testi-magazine', {
         scrollTrigger: { trigger: '.testi-section', start: 'top 80%', toggleActions: ta },
-        y: 40, opacity: 0, duration: 1.2, ease: 'power4.out'
+        y: 60, opacity: 0, duration: 1.2, ease: 'power4.out'
     });
 
     // Removed testi-card animation to prevent opacity bug
