@@ -90,7 +90,7 @@ function initSwiper() {
     }
 
     if(document.querySelector('.testi-slider')){
-        loadReviews();
+        initTestimonialSwitcher();
         testiSwiper = new Swiper('.testi-slider', {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -109,53 +109,62 @@ function initSwiper() {
 /* ═══════════════════════════════════════════
    DYNAMIC REVIEWS
    ═══════════════════════════════════════════ */
-function loadReviews() {
-    const grid = document.getElementById('testi-grid');
-    if (!grid) return;
-
-    const names = ["Vikram Sharma", "Ananya Joshi", "Arjun Patel", "Meera Kapoor", "Rahul Verma", "Neha Desai", "Siddharth Rao", "Pooja Singh", "Rohan Mehta", "Kavya Iyer", "Suresh Kumar", "Aditi Rao", "Karan Singh", "Nisha Patel", "Aman Gupta", "Simran Kaur", "Tariq Ali", "Priyanka Desai", "Rajiv Menon", "Sneha Reddy"];
-    const cities = ["Delhi", "Bangalore", "London", "Pune", "Mumbai", "Ahmedabad", "Hyderabad", "Jaipur", "Chennai", "Kolkata", "Surat", "Lucknow", "Kanpur", "Nagpur", "Indore", "Thane", "Bhopal", "Visakhapatnam", "Pimpri", "Patna"];
-    const comments = [
-        "The team completely redefined our living space. Their attention to natural lighting made our apartment feel twice as large. Highly recommended!",
-        "They truly understood our vision for a minimalist office environment. The project was delivered ahead of schedule.",
-        "World-class quality. The 3D renders were identical to the final result. The execution was absolutely flawless.",
-        "From the initial design discussions to the final handover, the team was incredibly professional.",
-        "Brilliant execution. They managed everything from civil work to styling. We didn't have to worry about a thing.",
-        "Their design sensibilities are unparalleled. Our boutique feels like a piece of art now.",
-        "Extremely professional and transparent approach. Highly recommend their commercial space expertise.",
-        "Demo Interior gave our heritage home a perfect modern touch without losing its original charm.",
-        "A truly remarkable transformation! The colors, the textures, everything came together perfectly.",
-        "I was blown away by their creativity and dedication. Best interior design team we have ever hired."
-    ];
-
-    let html = '';
-    // Generate 40 reviews
-    for (let i = 0; i < 40; i++) {
-        const name = names[i % names.length];
-        const city = cities[(i * 3) % cities.length];
-        const comment = comments[i % comments.length];
-        // Mix of 5 stars and 4 stars
-        const stars = (i % 3 === 0) ? "★★★★☆" : "★★★★★";
-        const avatarImg = 10 + (i % 60);
-
-        html += `
-        <div class="swiper-slide">
-            <div class="testi-card">
-                <div class="qm">❝</div>
-                <div class="testi-author">
-                    <img src="https://i.pravatar.cc/150?img=${avatarImg}" alt="Client">
-                    <div>
-                        <h5>${name}</h5>
-                        <small>${city}</small>
-                    </div>
-                </div>
-                <div class="stars">${stars}</div>
-                <p>${comment}</p>
-            </div>
-        </div>`;
+/* ═══════════════════════════════════════════
+   TESTIMONIAL SYSTEM
+   ═══════════════════════════════════════════ */
+const premiumReviews = [
+    {
+        name: "Priya Mehta",
+        location: "MUMBAI, INDIA",
+        quote: "Demo Interior turned our ideas into a beautiful reality. Every corner reflects elegance and functionality. Their attention to detail is truly world-class.",
+        img: "https://i.pravatar.cc/150?img=5"
+    },
+    {
+        name: "Vikram Sharma",
+        location: "DELHI, INDIA",
+        quote: "They truly understood our vision for a minimalist office environment. The project was delivered ahead of schedule and exceeded every expectation.",
+        img: "https://i.pravatar.cc/150?img=11"
+    },
+    {
+        name: "Ananya Joshi",
+        location: "BANGALORE, INDIA",
+        quote: "World-class quality. The 3D renders were identical to the final result. The execution was absolutely flawless and the team was a joy to work with.",
+        img: "https://i.pravatar.cc/150?img=32"
     }
+];
 
-    grid.innerHTML = html;
+let activeReviewIndex = 0;
+
+function initTestimonialSwitcher() {
+    const prevBtn = document.getElementById('testi-prev-btn');
+    const nextBtn = document.getElementById('testi-next-btn');
+    if (!prevBtn || !nextBtn) return;
+
+    prevBtn.addEventListener('click', () => {
+        activeReviewIndex = (activeReviewIndex - 1 + premiumReviews.length) % premiumReviews.length;
+        updateReview();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        activeReviewIndex = (activeReviewIndex + 1) % premiumReviews.length;
+        updateReview();
+    });
+}
+
+function updateReview() {
+    const review = premiumReviews[activeReviewIndex];
+    const container = document.getElementById('testi-active-container');
+    
+    gsap.to(container, {
+        opacity: 0, y: 20, duration: 0.4, onComplete: () => {
+            document.getElementById('active-quote').textContent = `"${review.quote}"`;
+            document.getElementById('active-img').src = review.img;
+            document.getElementById('active-name').textContent = review.name;
+            document.getElementById('active-location').textContent = review.location;
+            
+            gsap.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        }
+    });
 }
 
 /* ═══════════════════════════════════════════
@@ -250,37 +259,32 @@ function initAnimations() {
 
 
 
-    // ── PROCESS LEFT: Slide from Left ──
-    gsap.from('.process-left', {
-        scrollTrigger: { trigger: '.process-layout', start: 'top 85%', toggleActions: ta },
-        x: -100, opacity: 0, duration: 1, ease: 'power4.out'
-    });
+    // ── PREMIUM PROCESS: Horizontal Scroll ──
+    const stepsContainer = document.querySelector('.process-steps-horizontal');
+    if (stepsContainer) {
+        gsap.to(stepsContainer, {
+            x: () => -(stepsContainer.scrollWidth - stepsContainer.clientWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".process-section",
+                start: "top top",
+                end: () => `+=${stepsContainer.scrollWidth}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
 
-    // ── PROCESS STEPS: Stagger Down ──
-    gsap.from('.process-step', {
-        scrollTrigger: { trigger: '.process-steps', start: 'top 88%', toggleActions: ta },
-        y: -40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'bounce.out'
-    });
-
-    // ── PROCESS IMAGE: Scale Up & Rotate ──
-    gsap.from('.process-image', {
-        scrollTrigger: { trigger: '.process-image', start: 'top 90%', toggleActions: ta },
-        scale: 0.8, rotationZ: -5, opacity: 0, duration: 1, ease: 'power3.out'
-    });
-
-    // ── PROCESS IMAGE: Parallax ──
-    const processImg = document.querySelector('.process-image img');
-    if (processImg) {
-        gsap.fromTo(processImg, { y: 30, scale: 1.1 }, {
-            y: -30, scale: 1, ease: 'none',
-            scrollTrigger: { trigger: '.process-image', start: 'top bottom', end: 'bottom top', scrub: 1 }
+        gsap.from('.process-step-premium', {
+            scrollTrigger: { trigger: '.process-steps-horizontal', start: 'top 80%', toggleActions: ta },
+            opacity: 0, x: 50, duration: 0.8, stagger: 0.2, ease: 'power3.out'
         });
     }
 
-    // ── TESTIMONIAL BIG: Slide Left & Blur ──
-    gsap.from('.testi-big', {
-        scrollTrigger: { trigger: '.testi-top', start: 'top 80%', toggleActions: ta },
-        x: -100, opacity: 0, filter: 'blur(10px)', duration: 1, ease: 'power4.out'
+    // ── PREMIUM TESTIMONIALS: Center Spotlight ──
+    gsap.from('.testi-center-stage', {
+        scrollTrigger: { trigger: '.testi-section', start: 'top 80%', toggleActions: ta },
+        y: 40, opacity: 0, duration: 1.2, ease: 'power4.out'
     });
 
     // Removed testi-card animation to prevent opacity bug
