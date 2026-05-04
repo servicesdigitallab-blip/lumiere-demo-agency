@@ -267,6 +267,21 @@ function initAnimations() {
         });
     }
 
+    // ── NEW PUNCHLINE SECTION: Sequential Highlight ──
+    const punchlines = document.querySelectorAll('.punchline-text span');
+    if (punchlines.length > 0) {
+        punchlines.forEach((span, i) => {
+            ScrollTrigger.create({
+                trigger: span,
+                start: "top 70%",
+                end: "top 30%",
+                onEnter: () => span.classList.add('active'),
+                onLeaveBack: () => span.classList.remove('active'),
+                toggleActions: "play reverse play reverse"
+            });
+        });
+    }
+
     // ── ULTIMATE TESTIMONIALS: Floating Entrance ──
     gsap.from('.marquee-container', {
         scrollTrigger: { trigger: '.testi-section', start: 'top 85%', toggleActions: ta },
