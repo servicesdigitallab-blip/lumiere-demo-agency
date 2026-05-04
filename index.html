@@ -61,119 +61,57 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
-         SECTION 2: PORTFOLIO (Slider)
+         SECTION 2: OUR PROJECTS (ULTRA PREMIUM)
          ═══════════════════════════════════════════ -->
     <section class="portfolio-section" id="portfolio">
-        <div class="container">
-            <div class="portfolio-top">
-                <div class="portfolio-top-left">
-                    <div class="label-sm">Our Projects</div>
-                    <h2 class="title-xl">Spaces that Inspire, <br><span class="gold-text">Designed to Perfection.</span></h2>
-                    <p class="text-body" style="margin:20px 0;">We create timeless interiors that blend functionality with aesthetics to elevate the way you live, work & experience.</p>
-                    <a href="#" class="btn-dark" id="btn-explore-all">Explore All Projects <span class="arrow">→</span></a>
-                </div>
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All Projects</button>
-                    <button class="filter-tab" data-filter="residential">Residential</button>
-                    <button class="filter-tab" data-filter="commercial">Commercial</button>
-                    <button class="filter-tab" data-filter="hospitality">Hospitality</button>
-                </div>
-            </div>
-            <div class="bg-watermark">DESIGN</div>
+        <div class="portfolio-top">
+            <div class="label-sm">CURATED SPACES</div>
+            <h2 class="title-xl">Our <span class="gold-text">Signature</span> Projects</h2>
+        </div>
 
-            <!-- Swiper Slider for Projects -->
-            <div class="swiper port-swiper port-slider">
-                <div class="swiper-wrapper" id="port-grid">
-                    <!-- Cards will be generated via JS or we can put them here -->
-                    <div class="swiper-slide port-card" data-category="residential">
-                        <img src="assets/port-1.png" alt="The Azure Penthouse">
-                        <div class="port-card-num">01</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>The Azure Penthouse</h4>
-                            <p>Residential • Mumbai</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="residential">
-                        <img src="assets/port-2.png" alt="Oasis Villa">
-                        <div class="port-card-num">02</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Oasis Villa</h4>
-                            <p>Residential • Delhi</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="commercial">
-                        <img src="assets/port-3.png" alt="Nexus Corporate Workspace">
-                        <div class="port-card-num">03</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Nexus Workspace</h4>
-                            <p>Commercial • Bangalore</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="hospitality">
-                        <img src="assets/port-4.png" alt="Lumiere Boutique Hotel">
-                        <div class="port-card-num">04</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Lumiere Hotel</h4>
-                            <p>Hospitality • Goa</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="commercial">
-                        <img src="assets/port-5.png" alt="Aura Executive Lounge">
-                        <div class="port-card-num">05</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Aura Lounge</h4>
-                            <p>Commercial • Pune</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="residential">
-                        <img src="assets/port-2.png" alt="Skyline Apartment">
-                        <div class="port-card-num">06</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Skyline Apartment</h4>
-                            <p>Residential • Hyderabad</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="commercial">
-                        <img src="assets/port-3.png" alt="Zenith Tech Hub">
-                        <div class="port-card-num">07</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>Zenith Tech Hub</h4>
-                            <p>Commercial • Chennai</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide port-card" data-category="hospitality">
-                        <img src="assets/port-4.png" alt="The Crimson Cafe">
-                        <div class="port-card-num">08</div>
-                        <div class="port-card-expand">⤢</div>
-                        <div class="port-card-info">
-                            <h4>The Crimson Cafe</h4>
-                            <p>Hospitality • Jaipur</p>
-                            <div class="card-arrow"><button class="btn-gold-circle">→</button></div>
-                        </div>
-                    </div>
+        <!-- Desktop Horizontal Container -->
+        <div class="projects-horizontal-container" id="projectsSlider">
+            <div class="projects-track" id="projectsTrack">
+                <div class="project-slide">
+                    <span class="project-num-overlay">01</span>
+                    <img src="assets/port-1.png" alt="Azure Penthouse">
                 </div>
-                
-                <div class="port-nav">
-                    <button class="swiper-button-prev-custom">←</button>
-                    <button class="swiper-button-next-custom">→</button>
+                <div class="project-slide">
+                    <span class="project-num-overlay">02</span>
+                    <img src="assets/port-2.png" alt="Oasis Villa">
+                </div>
+                <div class="project-slide">
+                    <span class="project-num-overlay">03</span>
+                    <img src="assets/port-3.png" alt="Nexus Workspace">
+                </div>
+                <div class="project-slide">
+                    <span class="project-num-overlay">04</span>
+                    <img src="assets/port-4.png" alt="Lumiere Hotel">
+                </div>
+                <div class="project-slide">
+                    <span class="project-num-overlay">05</span>
+                    <img src="assets/port-5.png" alt="Aura Lounge">
                 </div>
             </div>
-            
-            <div class="scroll-indicator">Scroll <br> To Explore</div>
+        </div>
+
+        <!-- Mobile Vertical Stack -->
+        <div class="projects-vertical-stack" id="projectsStack">
+            <div class="project-card-mobile">
+                <img src="assets/port-1.png" alt="Azure Penthouse">
+            </div>
+            <div class="project-card-mobile">
+                <img src="assets/port-2.png" alt="Oasis Villa">
+            </div>
+            <div class="project-card-mobile">
+                <img src="assets/port-3.png" alt="Nexus Workspace">
+            </div>
+            <div class="project-card-mobile">
+                <img src="assets/port-4.png" alt="Lumiere Hotel">
+            </div>
+            <div class="project-card-mobile">
+                <img src="assets/port-5.png" alt="Aura Lounge">
+            </div>
         </div>
     </section>
 
