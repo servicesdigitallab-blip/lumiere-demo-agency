@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');
-:root{--bg:#FAF8F5;--bg-w:#fff;--bg-dark:#1A1A1A;--border:rgba(0,0,0,.08);--gold:#B4914F;--gold-l:rgba(180,145,79,.1);--td:#111827;--tm:#6B7280;--fh:'Cormorant Garamond',serif;--fb:'Jost',sans-serif}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+:root{--bg:#ffffff;--bg-w:#fff;--bg-dark:#0a0a0a;--border:rgba(0,0,0,.06);--gold:#c6a87d;--gold-l:rgba(198,168,125,.1);--td:#000000;--tm:#666666;--fh:'Outfit',sans-serif;--fb:'Plus Jakarta Sans',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--td);font-family:var(--fb);overflow-x:hidden;line-height:1.6;font-weight:300}
 h1,h2,h3,h4,h5,h6{font-family:var(--fh);font-weight:600;line-height:1.15}
@@ -92,10 +92,57 @@ section{padding:100px 0;position:relative;overflow:hidden}
 .menu-btn-round:hover span { background: #fff; }
 
 /* Hero */
-.hero-section{height:600vh;padding:0;overflow:visible}
-.hero-canvas-container{position:sticky;top:0;height:100vh;width:100%;overflow:hidden}
-#heroCanvas{width:100%;height:100%;display:block}
-.hero-overlay{position:sticky;top:0;height:100vh;width:100%;margin-top:-100vh;background:linear-gradient(to bottom,rgba(250,248,245,.05) 0%,rgba(250,248,245,.3) 60%,rgba(250,248,245,.98) 100%);pointer-events:none;z-index:1}
+.hero-overlay {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    margin-top: -100vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+video, #heroCanvas {
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+/* ── Section: Design. Inspire. Repeat. (Ultra Minimal) ── */
+.punchline-section {
+    padding: 180px 0;
+    background: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.punchline-text {
+    font-family: var(--fh);
+    font-size: clamp(80px, 15vw, 220px);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: #000;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.punchline-text span {
+    display: block;
+    opacity: 0.05;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.punchline-text span.active {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.punchline-text .gold-dot {
+    color: var(--gold);
+}
 
 /* ── Section 2: Our Projects (Ultra Premium) ── */
 .portfolio-section {
