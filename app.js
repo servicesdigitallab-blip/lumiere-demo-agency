@@ -71,23 +71,8 @@ function hideLoadingScreen() {
 let portSwiper;
 let testiSwiper;
 function initSwiper() {
-    if(document.querySelector('.port-swiper')){
-        portSwiper = new Swiper('.port-swiper', {
-            slidesPerView: 1.2,
-            spaceBetween: 20,
-            mousewheel: {
-                forceToAxis: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next-custom',
-                prevEl: '.swiper-button-prev-custom',
-            },
-            breakpoints: {
-                640: { slidesPerView: 2.2, spaceBetween: 20 },
-                1024: { slidesPerView: 4.2, spaceBetween: 20 }
-            }
-        });
-    }
+    // portSwiper logic removed for the new ultra-premium scroller
+
 
     if(document.querySelector('.testi-slider')){
         testiSwiper = new Swiper('.testi-slider', {
@@ -149,29 +134,7 @@ function resetCounter(el) {
 /* ═══════════════════════════════════════════
    FILTER TABS
    ═══════════════════════════════════════════ */
-function initFilters() {
-    const tabs = document.querySelectorAll('.filter-tab');
-    const slides = document.querySelectorAll('.swiper-slide.port-card');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            const filter = tab.getAttribute('data-filter');
-            
-            slides.forEach(slide => {
-                const cat = slide.getAttribute('data-category');
-                if (filter === 'all' || filter === cat) {
-                    slide.style.display = '';
-                    gsap.fromTo(slide, { opacity: 0, scale:0.8 }, { opacity: 1, scale:1, duration: 0.4 });
-                } else {
-                    slide.style.display = 'none';
-                }
-            });
-            if(portSwiper) portSwiper.update();
-        });
-    });
-}
+/* Filters removed for the new visuals-only project section */
 
 /* ═══════════════════════════════════════════
    GSAP SCROLL ANIMATIONS — ALL SECTIONS
@@ -181,12 +144,75 @@ function initAnimations() {
     // Helper for repeating animations on scroll
     const ta = "play reverse play reverse";
 
-    // ── PORTFOLIO CARDS: Stagger Rise ──
-    gsap.from('.port-card', {
-        scrollTrigger: { trigger: '.port-slider', start: 'top 88%', toggleActions: ta },
-        y: 100, opacity: 0, scale: 0.8, duration: 0.8, stagger: 0.1,
-        ease: 'back.out(1.5)'
-    });
+    // ── NEW PROJECT SCROLLER (DESKTOP) ──
+    const projectsSlider = document.getElementById('projectsSlider');
+    const track = document.getElementById('projectsTrack');
+    const slides = document.querySelectorAll('.project-slide');
+    
+    if (track && window.innerWidth > 768) {
+        const totalWidth = track.scrollWidth - window.innerWidth;
+        
+        let projectST = ScrollTrigger.create({
+            trigger: ".portfolio-section",
+            start: "top top",
+            end: () => "+=" + track.scrollWidth,
+            pin: true,
+            scrub: 1.2, // Medium-slow, premium feel
+            onUpdate: self => {
+                gsap.to(track, { x: -self.progress * (track.scrollWidth - window.innerWidth), duration: 0.2, ease: "power1.out" });
+                
+                // Dynamic Scaling for Center Focus
+                slides.forEach(slide => {
+                    const rect = slide.getBoundingClientRect();
+                    const centerX = window.innerWidth / 2;
+                    const slideCenter = rect.left + rect.width / 2;
+                    const distanceFromCenter = Math.abs(centerX - slideCenter);
+                    const scale = gsap.utils.mapRange(0, window.innerWidth, 1, 0.92, distanceFromCenter);
+                    gsap.to(slide, { scale: Math.max(0.92, scale), duration: 0.3 });
+                });
+            }
+        });
+
+        // Mouse Drag Logic
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        projectsSlider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - projectsSlider.offsetLeft;
+            scrollLeft = projectST.scroll(); // Get current scroll position from ScrollTrigger
+            projectsSlider.style.cursor = 'grabbing';
+        });
+
+        projectsSlider.addEventListener('mouseleave', () => { isDown = false; projectsSlider.style.cursor = 'grab'; });
+        projectsSlider.addEventListener('mouseup', () => { isDown = false; projectsSlider.style.cursor = 'grab'; });
+
+        projectsSlider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - projectsSlider.offsetLeft;
+            const walk = (x - startX) * 2; // Drag multiplier
+            window.scrollTo(0, scrollLeft - walk); // Update page scroll to reflect in pinned section
+        });
+    }
+
+    // ── MOBILE STACK ANIMATIONS ──
+    if (window.innerWidth <= 768) {
+        gsap.from('.project-card-mobile', {
+            scrollTrigger: {
+                trigger: '#projectsStack',
+                start: 'top 85%',
+                toggleActions: "play none none reverse"
+            },
+            y: 60,
+            opacity: 0,
+            scale: 0.96,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: 'power3.out'
+        });
+    }
 
     // ── STATS BANNER ──
     gsap.from('.stats-banner', {
